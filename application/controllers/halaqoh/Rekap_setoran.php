@@ -1,0 +1,127 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Rekap_setoran extends CI_Controller
+{
+
+  public function __construct()
+  {
+    parent::__construct();
+    //Load Dependencies
+    $this->load->model('Rekap_setoran_M');
+    $this->load->model('Santri_M');
+    $this->load->model('Kelas_M');
+  }
+
+  // List all your items
+  public function index()
+  {
+    $data = [
+      'title'   => 'Rekap Setoran',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'rekap_setoran' => $this->Rekap_setoran_M->getAllRekapSetoran(),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'isi'     => 'halaqoh/v-rekap_setoran',
+    ];
+    // var_dump($data['detail_kelompok']);
+    // die;
+
+    $this->load->view('templates/wrapper-admin', $data);
+  }
+
+  public function form_add()
+  {
+    $kelas = $this->input->get('kelas');
+    // check($kelas);
+    if (!$kelas) {
+      $data = [
+        'title'   => 'Tambah Data Rekap Setoran',
+        'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+        'santri' => '',
+        'kelas' => $this->Kelas_M->getAllKelas(),
+        'isi'     => 'halaqoh/v-add_rekap_setoran',
+      ];
+      // var_dump($data['detail_kelompok']);
+      // die;
+
+      $this->load->view('templates/wrapper-admin', $data);
+    } else {
+      $data = [
+        'title'   => 'Tambah Data Rekap Setoran',
+        'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+        'santri' => $this->Santri_M->getSantriKelas($kelas),
+        'kelas' => $this->Kelas_M->getAllKelas(),
+        'isi'     => 'halaqoh/v-add_rekap_setoran',
+      ];
+      // var_dump($data['detail_kelompok']);
+      // die;
+
+      $this->load->view('templates/wrapper-admin', $data);
+    }
+  }
+
+  public function add_hasil()
+  {
+    $kelas = $this->input->post('kelas');
+
+    $idSiswa = $this->input->post('IdSiswa');
+    // check($idSiswa);
+    $pekan = $this->input->post('pekan');
+
+
+    $jml_setoran = $this->Rekap_setoran_M->countKeterangan($idSiswa, $pekan);
+    // check($this->db->last_query());
+    $data = [
+      'title'   => 'Tambah Data Rekap Setoran',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'santri' => $this->Santri_M->getSantriKelas($kelas),
+      'kelas' => $this->Kelas_M->getAllKelas(),
+      'isi'     => 'halaqoh/v-add_rekap_setoran',
+      'IdSiswa' => $idSiswa,
+      'JmlTugas' => $this->input->post('jml_tugas'),
+      'data_setoran' => $jml_setoran,
+      'PekanRekap' => $pekan,
+    ];
+    // check($data);
+    $this->load->view('templates/wrapper-admin', $data);
+  }
+
+  // Add a new item
+  public function add()
+  {
+    $idSiswa = $this->input->post('IdSiswa');
+    $JmlTugas = $this->input->post('JmlTugas');
+    $JmlSetoran = $this->input->post('JmlSetoran');
+    $PekanRekap = $this->input->post('PekanRekap');
+    $Hasil = $this->input->post('Hasil');
+    $Prosentase = $this->input->post('Prosentase');
+    $Reward = $this->input->post('Reward');
+
+    foreach ($idSiswa as $key => $value) {
+      $data[] = [
+        'IdSiswa' => $value['IdSiswa'],
+        'JmlTugas' => $JmlTugas[$key],
+        'JmlSetoran' => $JmlSetoran[$key],
+        'PekanRekap' => $PekanRekap[$key],
+        'Hasil' => $Hasil[$key],
+        'Prosentase' => $Prosentase[$key],
+        'Reward' => $Reward[$key],
+      ];
+    }
+    $this->db->insert_batch('rekapsetoran', $data);
+    $this->session->set_flashdata('pesan', 'Berhasil ditambahkan!');
+    redirect('halaqoh/rekap_setoran');
+  }
+
+  //Update one item
+  public function update($id = NULL)
+  {
+  }
+
+  //Delete one item
+  public function delete($id = NULL)
+  {
+  }
+}
+
+/* End of file Rekap_setoran.php */
