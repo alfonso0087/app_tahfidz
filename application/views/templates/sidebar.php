@@ -270,7 +270,7 @@
               </li>
               <!-- Hasil Ujian -->
               <li class="nav-item">
-                <a href="<?= base_url('ujian/hasil'); ?>" class="nav-link <?= $subUrl == "hasil" ? 'active bg-primary' : ''; ?>">
+                <a href="<?= base_url('ujian/hasil_ujian'); ?>" class="nav-link <?= $subUrl == "hasil_ujian" ? 'active bg-primary' : ''; ?>">
                   <i class="fas fa-fw fa-columns nav-icon"></i>
                   <p style="color: white;">Hasil Ujian</p>
                 </a>
@@ -318,6 +318,13 @@
                 <a href="<?= base_url('catatan/jenis_catatan'); ?>" class="nav-link <?= $subUrl == "jenis_catatan" ? 'active bg-primary' : ''; ?>">
                   <i class="far fa-fw fa-file-alt nav-icon"></i>
                   <p style="color: white;">Jenis Catatan</p>
+                </a>
+              </li>
+              <!-- Detail Catatan -->
+              <li class="nav-item nav-child-indent">
+                <a href="<?= base_url('catatan/detail_catatan'); ?>" class="nav-link <?= $subUrl == "detail_catatan" ? 'active bg-primary' : ''; ?>">
+                  <i class="fas fa-fw fa-file-code nav-icon"></i>
+                  <p style="color: white;">Detail Catatan Santri</p>
                 </a>
               </li>
               <!-- Catatan Pelanggaran -->
