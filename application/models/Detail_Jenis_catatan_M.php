@@ -13,6 +13,16 @@ class Detail_Jenis_catatan_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getDetailByJenisCatatan($IdJenisCatatan)
+  {
+    $idJenisCatatan = $IdJenisCatatan;
+    $this->db->select('djc.*,jc.JenisCatatan');
+    $this->db->from('detailjeniscatatan djc');
+    $this->db->join('jeniscatatan jc', 'jc.IdJenisCatatan = djc.IdJeniscatatan', 'left');
+    $this->db->where('djc.IdJenisCatatan', $idJenisCatatan);
+    return $this->db->get()->result_array();
+  }
+
   public function addDetailJenisCatatan($data)
   {
     $this->db->insert('detailjeniscatatan', $data);

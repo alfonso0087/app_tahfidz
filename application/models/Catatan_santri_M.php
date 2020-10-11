@@ -5,10 +5,11 @@ class Catatan_santri_M extends CI_Model
 {
   public function getAllCatatanSantri()
   {
-    $this->db->select('dc.*,s.NamaLengkap,jc.JenisCatatan,');
+    $this->db->select('dc.*,s.NamaLengkap,jc.JenisCatatan,p.Periode');
     $this->db->from('detailcatatan dc');
     $this->db->join('siswa s', 's.IdSiswa = dc.IdSiswa', 'left');
     $this->db->join('jeniscatatan jc', 'jc.IdJenisCatatan = dc.IdJenisCatatan', 'left');
+    $this->db->join('periode p', 'p.IdPeriode = dc.IdPeriode', 'left');
     return $this->db->get()->result_array();
   }
 

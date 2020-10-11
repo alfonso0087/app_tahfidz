@@ -27,8 +27,10 @@
                   <tr>
                     <th style="width: 50px;">No</th>
                     <th style="width: 150px;">Nama Santri</th>
+                    <th>Periode</th>
                     <th>Jenis Catatan</th>
-                    <th style="width: 500px;">Catatan</th>
+                    <th style="width: 250px;">Detail Catatan</th>
+                    <th style="width: 250px;">Catatan Musyrif</th>
                     <th style="width: 200px;">Aksi</th>
                   </tr>
                 </thead>
@@ -39,12 +41,15 @@
                     <tr>
                       <td><?= $no++; ?></td>
                       <td style="text-align: left;"><?= $cs['NamaLengkap']; ?></td>
+                      <td style="text-align: left;"><?= $cs['Periode']; ?></td>
                       <td style="text-align: left;"><?= $cs['JenisCatatan']; ?></td>
                       <td>
-                        <p style="text-align: justify;"><?= $cs['IsiCatatan']; ?></p>
+                        <p style="text-align: left;"><?= $cs['IsiCatatan']; ?></p>
                       </td>
                       <td>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#UpdateCatatanSantri<?= $cs['IdCatatan']; ?>">Ubah</button>
+                        <p style="text-align: left;"><?= $cs['CatatanMusyrif']; ?></p>
+                      </td>
+                      <td>
                         <a href="<?= base_url('catatan/catatan_santri/delete/' . $cs['IdCatatan']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Catatan" namaData=<?= $cs['NamaLengkap']; ?>>Hapus</a>
                       </td>
                     </tr>
@@ -67,7 +72,7 @@
 
 <!-- Modal AddCatatan -->
 <div class="modal fade" id="addCatatanSantri">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-success">
         <h4 class="modal-title">Tambah Data Catatan Santri</h4>
@@ -80,24 +85,40 @@
         <div class="form-group">
           <label for="nama">Nama Santri</label>
           <select name="nama" class="form-control">
-            <option>Nama Santri</option>
+            <option> -- Pilih Nama Santri -- </option>
             <?php foreach ($santri as $san) : ?>
               <option value="<?= $san['IdSiswa']; ?>"><?= $san['NamaLengkap']; ?></option>
             <?php endforeach; ?>
           </select>
         </div>
         <div class="form-group">
-          <label for="jeniscatatan">Jenis Catatan</label>
-          <select name="jeniscatatan" class="form-control">
-            <option>Jenis Catatan</option>
-            <?php foreach ($jenis_catatan as $jc) : ?>
-              <option value="<?= $jc['IdJenisCatatan']; ?>"><?= $jc['JenisCatatan']; ?></option>
+          <label for="periode">Periode</label>
+          <select name="periode" class="form-control">
+            <option> -- Pilih Periode -- </option>
+            <?php foreach ($periode as $p) : ?>
+              <option value="<?= $p['IdPeriode']; ?>"><?= $p['Periode']; ?></option>
             <?php endforeach; ?>
           </select>
         </div>
         <div class="form-group">
-          <label for="isi">Isi Catatan</label>
-          <textarea name="isi" class="form-control" rows="5" placeholder="Isikan Catatan"></textarea>
+          <label for="jeniscatatan">Jenis Catatan</label>
+          <select name="jeniscatatan" class="form-control">
+            <option> -- Pilih Jenis Catatan -- </option>
+            <?php foreach ($jenis_catatan as $jc) : ?>
+              <option value="<?= $jc['IdJenisCatatan']; ?>" id_jeniscatatan="<?= $jc['IdJenisCatatan']; ?>"><?= $jc['JenisCatatan']; ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Detail Jenis Catatan</label>
+          <div class="select2-blue">
+            <select class="select2" multiple="multiple" style="width: 100%;" data-dropdown-css-class="select2-blue" name="detailjeniscatatan[]" data-placeholder=" -- Pilih Detail Jenis Catatan -- " id="detailjeniscatatan">
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="catatan_musyrif">Catatan Musyrif</label>
+          <textarea name="catatan_musyrif" class="form-control" rows="4" placeholder="Jika ada catatan tambahan silahkan isi form ini, jika tidak bisa diabaikan."></textarea>
         </div>
       </div>
       <div class="modal-footer justify-content-between">
@@ -177,3 +198,30 @@
   </div>
 <?php endforeach; ?>
 <!-- /.modal -->
+
+<script>
+  $(function() {
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+  });
+
+  $(document).ready(function() {
+    $("select[name=jeniscatatan]").on("change", function() {
+      var idjeniscatatan = $("option:selected", this).attr("id_jeniscatatan");
+      // alert(idjeniscatatan);
+      $.ajax({
+        type: "POST",
+        url: "<?= base_url('catatan/Catatan_santri/getDetailCatatanByJenis') ?>",
+        data: 'id_jenis_catatan=' + idjeniscatatan,
+        success: function(hasil) {
+          // console.log(hasil);
+          $("select[id=detailjeniscatatan]").html(hasil);
+        }
+      });
+    });
+  });
+</script>
