@@ -96,19 +96,37 @@ class Rekap_setoran extends CI_Controller
     $Hasil = $this->input->post('Hasil');
     $Prosentase = $this->input->post('Prosentase');
     $Reward = $this->input->post('Reward');
+    $data = [];
+    // $cek = [
+    //   'IdSiswa' => $idSiswa,
+    //   'JmlTugas' => $JmlTugas,
+    //   'JmlSetoran' => $JmlSetoran,
+    //   'PekanRekap' => $PekanRekap,
+    //   'Hasil' => $Hasil,
+    //   'Prosentase' => $Prosentase,
+    //   'Reward' => $Reward
+    // ];
 
-    foreach ($idSiswa as $key => $value) {
-      $data[] = [
-        'IdSiswa' => $value['IdSiswa'],
-        'JmlTugas' => $JmlTugas[$key],
-        'JmlSetoran' => $JmlSetoran[$key],
-        'PekanRekap' => $PekanRekap[$key],
-        'Hasil' => $Hasil[$key],
-        'Prosentase' => $Prosentase[$key],
-        'Reward' => $Reward[$key],
-      ];
+
+    foreach ($Reward as $reward => $r) {
+      foreach ($Prosentase as $pros => $p) {
+        foreach ($Hasil as $hasil => $h) {
+          foreach ($JmlSetoran as $setoran => $js) {
+            foreach ($idSiswa as $siswa => $s) {
+              $data[$siswa]['IdSiswa'] = $s;
+              $data[$siswa]['JmlTugas'] = $JmlTugas;
+              $data[$setoran]['JmlSetoran'] = $js;
+              $data[$siswa]['PekanRekap'] = $PekanRekap;
+              $data[$hasil]['Hasil'] = $h;
+              $data[$pros]['Prosentase'] = $p;
+              $data[$reward]['Reward'] = $r;
+            }
+          }
+        }
+      }
     }
-    $this->db->insert_batch('rekapsetoran', $data);
+    // check($data);
+    $this->Rekap_setoran_M->addRekapSetoran($data);
     $this->session->set_flashdata('pesan', 'Berhasil ditambahkan!');
     redirect('halaqoh/rekap_setoran');
   }

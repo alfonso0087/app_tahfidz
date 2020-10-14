@@ -96,7 +96,7 @@
             <select name="siswa" class="form-control">
               <option> -- Pilih Santri -- </option>
               <?php foreach ($siswa as $sis) : ?>
-                <option value="<?= $sis['IdSiswa']; ?>"><?= $sis['NamaLengkap']; ?></option>
+                <option value="<?= $sis['IdSiswa']; ?>"><?= $sis['NamaKelas']; ?> | <?= $sis['NamaLengkap']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -149,7 +149,8 @@
             <div class="col-sm-8">
               <select name="kelompok" class="form-control">
                 <?php if ($dk['IdKelompok']) : ?>
-                  <option value="<?= $dk['IdKelompok']; ?>"><?= $dk['NamaKelompok']; ?></option>
+                  <option value="<?= $dk['IdKelompok']; ?>" selected><?= $dk['NamaKelompok']; ?></option>
+                  <option value=""> -- Pilih Kelompok -- </option>
                   <?php foreach ($kelompok as $klp) : ?>
                     <option value="<?= $klp['IdKelompok']; ?>"><?= $klp['NamaKelompok']; ?></option>
                   <?php endforeach; ?>
@@ -171,13 +172,14 @@
               <select name="siswa" class="form-control">
                 <?php if ($dk['IdSiswa']) : ?>
                   <option value="<?= $dk['IdSiswa']; ?>"><?= $dk['NamaLengkap']; ?></option>
+                  <option value=""> -- Pilih Santri -- </option>
                   <?php foreach ($siswa as $sis) : ?>
-                    <option value="<?= $sis['IdSiswa']; ?>"><?= $sis['NamaLengkap']; ?></option>
+                    <option value="<?= $sis['IdSiswa']; ?>"><?= $sis['NamaKelas']; ?> | <?= $sis['NamaLengkap']; ?></option>
                   <?php endforeach; ?>
                 <?php else : ?>
                   <option> -- Pilih Santri -- </option>
                   <?php foreach ($siswa as $sis) : ?>
-                    <option value="<?= $sis['IdSiswa']; ?>"><?= $sis['NamaLengkap']; ?></option>
+                    <option value="<?= $sis['IdSiswa']; ?>"><?= $sis['NamaKelas']; ?> | <?= $sis['NamaLengkap']; ?></option>
                   <?php endforeach; ?>
                 <?php endif; ?>
               </select>
@@ -192,6 +194,7 @@
               <select name="musyrif" class="form-control">
                 <?php if ($dk['IdMusyrif']) : ?>
                   <option value="<?= $dk['IdMusyrif']; ?>"><?= $dk['NamaMusyrif']; ?></option>
+                  <option value=""> -- Pilih Musyrif -- </option>
                   <?php foreach ($musyrif as $mus) : ?>
                     <option value="<?= $mus['IdMusyrif']; ?>"><?= $mus['NamaMusyrif']; ?></option>
                   <?php endforeach; ?>

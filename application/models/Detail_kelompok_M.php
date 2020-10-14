@@ -5,12 +5,13 @@ class Detail_kelompok_M extends CI_Model
 {
   public function getAllDetailKelompok()
   {
-    $this->db->select('dk.*,k.NamaKelompok,s.NamaLengkap,m.NamaMusyrif');
+    $this->db->select('dk.*,k.NamaKelompok,s.NamaLengkap,m.NamaMusyrif,kls.NamaKelas');
     $this->db->from('detailkelompok dk');
     $this->db->join('kelompokhalaqoh k', 'k.IdKelompok = dk.IdKelompok', 'left');
     $this->db->join('siswa s', 's.IdSiswa = dk.IdSiswa', 'left');
     $this->db->join('musyrif m', 'm.IdMusyrif = dk.IdMusyrif', 'left');
-    $this->db->order_by('k.NamaKelompok', 'asc');
+    $this->db->join('kelas kls', 'kls.IdKelas = s.IdKelas', 'left');
+    // $this->db->order_by('k.NamaKelompok', 'asc');
     return $this->db->get()->result_array();
   }
 

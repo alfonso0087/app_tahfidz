@@ -14,13 +14,14 @@
             </div>
 
             <!-- Swall -->
-            <div class="flash-data" data-flashdata="<?= $this->session->flashdata('pesan'); ?>" data-title="Data Rekap Ujian">
+            <div class="flash-data" data-flashdata="<?= $this->session->flashdata('pesan'); ?>" data-title="Data Hasil Ujian">
             </div>
             <div class="card-body">
               <!-- Add Data -->
               <div class="col mb-3">
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRekapUjian"><i class="fas fa-plus"></i> Tambah Data</button> -->
-                <a href="<?= base_url('ujian/hasil_ujian/form_add'); ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Data</a>
+                <a href="<?= base_url('ujian/hasil_ujian/form_add'); ?>" class="btn btn-primary btn-sm"><i class="fas fa-user"></i> Proses Nilai (Individu)</a>
+                <a href="<?= base_url('ujian/hasil_ujian/form_add_banyak'); ?>" class="btn btn-primary btn-sm ml-2"><i class="fas fa-users"></i> Proses Nilai (Kelas)</a>
+                <a href="<?= base_url('ujian/hasil_ujian/perankingan'); ?>" class="btn btn-primary btn-sm ml-2"><i class="fas fa-sort-numeric-down"></i> Perankingan</a>
               </div>
 
               <table id="example2" class="table  table-striped text-center">
@@ -34,8 +35,8 @@
                     <th>Total Nilai</th>
                     <th>Rata-Rata</th>
                     <th>Reward</th>
-                    <!-- <th>Rangking</th> -->
-                    <!-- <th style="width: 200px;">Aksi</th> -->
+                    <th>Rangking</th>
+                    <th style="width: 150px;">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,15 +47,15 @@
                       <td><?= $no++; ?></td>
                       <td><?= $hu['NamaLengkap']; ?></td>
                       <td><?= $hu['NamaKelas']; ?></td>
-                      <td><?= $hu['Periode']; ?></td>
+                      <td><?= $hu['periode']; ?></td>
                       <td><?= $hu['Total']; ?></td>
                       <td><?= $hu['Rata-rata']; ?></td>
                       <td><?= $hu['Reward']; ?></td>
-                      <!-- <td><b><?= $ru['ket_rekap']; ?></b></td> -->
-                      <!-- <td>
-                        <a href="<?= base_url('ujian/rekap_ujian/form_update/' . $ru['IdUjian']); ?>" class="btn btn-success">Ubah</a>
-                        <a href="<?= base_url('ujian/rekap_ujian/delete/' . $ru['IdUjian']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Rekap Ujian" namaData=<?= $ru['NamaLengkap']; ?>>Hapus</a>
-                      </td> -->
+                      <td><?= $hu['Rangking']; ?></td>
+                      <td>
+                        <a href="<?= base_url('ujian/hasil_ujian/form_update/' . $hu['IdHasil']); ?>" class="btn btn-success btn-sm">Ubah</a>
+                        <a href="<?= base_url('ujian/hasil_ujian/delete/' . $hu['IdHasil']); ?>" class="btn btn-danger btn-sm ml-3 tombol-hapus" tipeData="Hasil Ujian" namaData=<?= $hu['NamaLengkap']; ?>>Hapus</a>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>

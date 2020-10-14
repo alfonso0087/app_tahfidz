@@ -40,7 +40,7 @@
                       <td><?= $no++; ?></td>
                       <td><?= $setor['IsiTarget']; ?></td>
                       <td><?= $setor['Waktu']; ?></td>
-                      <td><?= $setor['NamaKelompok']; ?></td>
+                      <td><?= $setor['NamaKelompok']; ?> (<?= $setor['NamaLengkap']; ?>)</td>
                       <td><?= $setor['Presensi']; ?></td>
                       <td><?= $setor['Keterangan']; ?></td>
                       <td>
@@ -87,7 +87,7 @@
             <select name="isi" class="form-control">
               <option> -- Pilih Isi Target -- </option>
               <?php foreach ($detail_target as $dt) : ?>
-                <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
+                <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['NamaKelas']; ?> | <?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -115,7 +115,7 @@
             <select name="kelompok" class="form-control">
               <option> -- Pilih Kelompok -- </option>
               <?php foreach ($detail_kelompok as $k) : ?>
-                <option value="<?= $k['IdDetailKelompok']; ?>"><?= $k['NamaKelompok']; ?> - <?= $k['NamaLengkap']; ?></option>
+                <option value="<?= $k['IdDetailKelompok']; ?>"><?= $k['NamaKelompok']; ?> | <?= $k['NamaKelas']; ?> - <?= $k['NamaLengkap']; ?> </option>
               <?php endforeach; ?>
             </select>
           </div>

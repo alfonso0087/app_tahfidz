@@ -9,7 +9,7 @@ class Detail_target_M extends CI_Model
     $this->db->from('detailtarget det');
     $this->db->join('target tgt', 'det.IdTarget = tgt.IdTarget', 'left');
     $this->db->join('kelas kls', 'kls.IdKelas = tgt.IdKelas', 'left');
-
+    $this->db->order_by('det.IdTarget', 'asc');
     return $this->db->get()->result_array();
   }
 

@@ -27,7 +27,7 @@
                   <select name="nama_santri" class="form-control">
                     <option> -- Pilih Santri -- </option>
                     <?php foreach ($santri as $s) : ?>
-                      <option value="<?= $s['IdSiswa']; ?>"><?= $s['NamaLengkap']; ?> | <?= $s['NamaKelas']; ?></option>
+                      <option value="<?= $s['IdSiswa']; ?>"><?= $s['NamaKelas']; ?> | <?= $s['NamaLengkap']; ?></option>
                     <?php endforeach; ?>
                   </select>
                 </div>

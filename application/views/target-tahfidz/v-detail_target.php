@@ -28,7 +28,7 @@
                 <thead>
                   <tr>
                     <th style="width: 50px;">No</th>
-                    <th>Pekan</th>
+                    <th>Pekan / Kelas</th>
                     <th>Isi Target</th>
                     <th>Keterangan</th>
                     <th>Tanggal</th>
@@ -41,8 +41,8 @@
                   foreach ($detail as $det) : ?>
                     <tr>
                       <td><?= $no++; ?></td>
-                      <td><?= $det['Pekan']; ?></td>
-                      <td><?= $det['IsiTarget']; ?></td>
+                      <td><?= $det['Pekan']; ?> / <?= $det['NamaKelas']; ?></td>
+                      <td style="text-align: left;"><?= $det['IsiTarget']; ?></td>
                       <td><?= $det['Keterangan']; ?></td>
                       <td><?= date('d F Y', strtotime($det['Tgl'])); ?></td>
                       <td>

@@ -5,30 +5,71 @@ class Hasil_ujian_M extends CI_Model
 {
   public function getAllHasilUjian()
   {
-    $this->db->select('hu.*,s.NamaLengkap,pu.*,kls.*');
+    $this->db->select('hu.*,s.NamaLengkap,pu.*,kls.*,p.periode');
     $this->db->from('hasilujian hu');
     $this->db->join('siswa s', 's.IdSiswa = hu.IdSiswa', 'left');
     $this->db->join('periodeujian pu', 'pu.IdPeriodeUjian = hu.IdPeriodeUjian', 'left');
+    $this->db->join('periode p', 'p.IdPeriode = pu.IdPeriode', 'left');
     $this->db->join('kelas kls', 'pu.IdKelas = kls.IdKelas', 'left');
     return $this->db->get()->result_array();
   }
 
-  public function hitungTotalNilai($IdSiswa, $IdPeriodeUjian)
+  public function getHasilUjianById($IdHasil)
   {
-    // ! Belum bisa menampilkan jumlah/total nilai berdasarkan santri dan periode ujian
-    // $this->db->select_sum('Nilai', 'TotalNilai');
-    // $this->db->from('rekapujian');
-    // $this->db->where('IdSiswa', $IdSiswa);
-    // $this->db->where('IdPriodeUjian', $IdPeriodeUjian);
-    // return $this->db->get()->result_array();
+    $this->db->select('hu.*,s.NamaLengkap,pu.*,kls.*,p.periode');
+    $this->db->from('hasilujian hu');
+    $this->db->join('siswa s', 's.IdSiswa = hu.IdSiswa', 'left');
+    $this->db->join('periodeujian pu', 'pu.IdPeriodeUjian = hu.IdPeriodeUjian', 'left');
+    $this->db->join('periode p', 'p.IdPeriode = pu.IdPeriode', 'left');
+    $this->db->join('kelas kls', 'pu.IdKelas = kls.IdKelas', 'left');
+    $this->db->where('hu.IdHasil', $IdHasil);
+    return $this->db->get()->result_array();
+  }
 
-    // $this->db->select_sum('Nilai', 'TotalNilai');
-    // $this->db->from('rekapujian');
-    // $this->db->where('IdSiswa', $$IdSiswa);
-    $query = $this->db->query("SELECT SUM(`Nilai`) AS TotalNilai, AVG(`Nilai`) AS Rata-rata FROM `rekapujian` WHERE `IdSiswa`= ' . $IdSiswa . ' AND `IdPeriodeUjian`= ' . $IdPeriodeUjian .");
+  public function addHasilUjianIndividu($data)
+  {
+    $this->db->insert('hasilujian', $data);
+  }
 
-    return $query->result();
-    // check($query);
+  public function addHasilUjian($data)
+  {
+    $this->db->insert_batch('hasilujian', $data);
+  }
+
+  public function perankingan_kelas($IdKelas, $IdPeriodeUjian)
+  {
+    $query = $this->db->query('SELECT `hasilujian`.`IdHasil`,`hasilujian`.`IdSiswa`,`hasilujian`.`IdPeriodeUjian`,`hasilujian`.`Total`,`hasilujian`.`Reward`,`periode`.`Periode`,`hasilujian`.`Rata-rata`,`siswa`.`NamaLengkap`,`kelas`.`NamaKelas`,	( SELECT FIND_IN_SET( `hasilujian`.`Rata-rata`,
+    ( select
+    group_concat(distinct `Rata-rata`
+    order by `Rata-rata` DESC)
+    from `hasilujian`))
+    ) as Ranking
+    FROM `hasilujian`
+    JOIN `siswa` ON `siswa`.`IdSiswa`=`hasilujian`.`IdSiswa`
+    JOIN `kelas` ON `kelas`.`IdKelas`=`siswa`.`IdKelas`
+    JOIN `periodeujian` ON `periodeujian`.`IdPeriodeUjian`=`hasilujian`.`IdPeriodeUjian`
+    JOIN `periode` ON `periode`.`IdPeriode`=`periodeujian`.`IdPeriode`
+    WHERE `kelas`.`IdKelas`="' . $IdKelas . '"
+    AND `hasilujian`.`IdPeriodeUjian`="' . $IdPeriodeUjian . '"
+    ORDER BY Ranking ASC');
+    return $query->result_array();
+  }
+
+  public function Update_Perankingan($data)
+  {
+    $this->db->update_batch('hasilujian', $data, 'IdHasil');
+  }
+
+  public function updateReward($data)
+  {
+    $this->db->where('IdHasil', $data['IdHasil']);
+    $this->db->update('HasilUjian', $data);
+  }
+
+  public function deleteHasilUjian($data)
+  {
+    $this->db->where('IdHasil', $data['IdHasil']);
+    $this->db->delete('HasilUjian', $data);
   }
 }
 

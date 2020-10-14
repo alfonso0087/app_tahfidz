@@ -114,7 +114,7 @@
           <select name="kelas" class="form-control" required>
             <option> -- Pilih Kelas -- </option>
             <?php foreach ($kelas as $kls) : ?>
-              <option value="<?= $kls['IdKelas']; ?>"><?= $kls['SebutanKelas']; ?> | <?= $kls['NamaKelas']; ?></option>
+              <option value="<?= $kls['IdKelas']; ?>"><?= $kls['NamaKelas']; ?></option>
             <?php endforeach; ?>
           </select>
         </div>

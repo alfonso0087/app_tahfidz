@@ -26,7 +26,10 @@ class Rekap_setoran_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
-  
+  public function addRekapSetoran($data)
+  {
+    $this->db->insert_batch('rekapsetoran', $data);
+  }
 }
 
 // COALESCE(COUNT(*),0) jumlah_setoran
