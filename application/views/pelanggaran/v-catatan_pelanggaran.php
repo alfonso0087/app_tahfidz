@@ -29,6 +29,7 @@
                     <th>Nama Santri</th>
                     <th>Jenis Iqob</th>
                     <th>Tanggal</th>
+                    <th>Points</th>
                     <th style="width: 200px;">Aksi</th>
                   </tr>
                 </thead>
@@ -41,6 +42,7 @@
                       <td><?= $pel['NamaLengkap']; ?></td>
                       <td><?= $pel['JenisIqob']; ?></td>
                       <td><?= date('d F Y', strtotime($pel['Tgl'])); ?></td>
+                      <td><?= $pel['Points']; ?></td>
                       <td>
                         <button class="btn btn-success" data-toggle="modal" data-target="#UpdateCatatanPelanggaran<?= $pel['IdIqob']; ?>">Ubah</button>
                         <a href="<?= base_url('pelanggaran/catatan_pelanggaran/delete/' . $pel['IdIqob']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Detail Pelanggaran" namaData=<?= $pel['NamaLengkap']; ?>>Hapus</a>
@@ -84,7 +86,7 @@
             <select name="nama" class="form-control">
               <option>Nama Santri</option>
               <?php foreach ($santri as $san) : ?>
-                <option value="<?= $san['IdSiswa']; ?>"><?= $san['NamaLengkap']; ?></option>
+                <option value="<?= $san['IdSiswa']; ?>"><?= $san['NamaKelas']; ?> | <?= $san['NamaLengkap']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -94,12 +96,20 @@
             <label for="jenisiqob">Jenis Iqob</label>
           </div>
           <div class="col-sm-8">
-            <select name="jenisiqob" class="form-control">
+            <select name="jenisiqob" id="id_iqob" class="form-control" onchange="cek_poin()">
               <option>Jenis Iqob</option>
               <?php foreach ($jenisiqob as $jp) : ?>
                 <option value="<?= $jp['IdJenisIqob']; ?>"><?= $jp['JenisIqob']; ?></option>
               <?php endforeach; ?>
             </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for="poin">Poin</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="poin" name="poin" readonly>
           </div>
         </div>
         <div class="form-group row">
@@ -167,7 +177,7 @@
               <label for="jenisiqob">Jenis Iqob</label>
             </div>
             <div class="col-sm-8">
-              <select name="jenisiqob" class="form-control">
+              <select name="jenisiqob" id="id_pelanggaran" class="form-control" onchange="cek_point()">
                 <?php if ($pg['IdJenisIqob']) : ?>
                   <option value="<?= $pg['IdJenisIqob']; ?>"><?= $pg['JenisIqob']; ?></option>
                   <option>Jenis Iqob</option>
@@ -182,6 +192,14 @@
               <?php endforeach; ?>
               </select>
             <?php endif; ?>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <label for="poin">Poin</label>
+            </div>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="point" name="poin" value="<?= $pg['Points']; ?>" readonly>
             </div>
           </div>
           <div class="form-group row">
@@ -216,3 +234,39 @@
   </script>
 <?php endforeach; ?>
 <!-- /.modal -->
+
+<script>
+  function cek_poin() {
+    IdPelanggaran = document.getElementById("id_iqob").value;
+    // alert(IdPelanggaran);
+
+    $.ajax({
+      type: "POST",
+      url: "<?= base_url('pelanggaran/catatan_pelanggaran/getPointById') ?>",
+      data: 'IdJenisIqob=' + IdPelanggaran,
+      success: function(poin) {
+        // alert(poin);
+        var json = poin;
+        obj = JSON.parse(json);
+        $('#poin').val(obj.Poin);
+      }
+    });
+  }
+
+  function cek_point() {
+    IdPelanggaran = document.getElementById("id_pelanggaran").value;
+    // alert(IdPelanggaran);
+
+    $.ajax({
+      type: "POST",
+      url: "<?= base_url('pelanggaran/catatan_pelanggaran/getPointById') ?>",
+      data: 'IdJenisIqob=' + IdPelanggaran,
+      success: function(poin) {
+        // alert(poin);
+        var json = poin;
+        obj = JSON.parse(json);
+        $('#point').val(obj.Poin);
+      }
+    });
+  }
+</script>

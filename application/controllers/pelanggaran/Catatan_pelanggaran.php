@@ -33,8 +33,10 @@ class Catatan_pelanggaran extends CI_Controller
     $data = [
       'IdSiswa' => $this->input->post('nama'),
       'IdJenisIqob' => $this->input->post('jenisiqob'),
-      'Tgl'   => $this->input->post('tgl')
+      'Tgl'   => $this->input->post('tgl'),
+      'Points' => $this->input->post('poin')
     ];
+    // check($data);
     $this->Catatan_pelanggaran_M->addCatatanPelanggaran($data);
     $this->session->set_flashdata('pesan', 'Berhasil ditambahkan!');
     redirect('pelanggaran/catatan_pelanggaran');
@@ -47,8 +49,10 @@ class Catatan_pelanggaran extends CI_Controller
       'IdIqob' => $id,
       'IdSiswa' => $this->input->post('nama'),
       'IdJenisIqob' => $this->input->post('jenisiqob'),
-      'Tgl'   => $this->input->post('tgl')
+      'Tgl'   => $this->input->post('tgl'),
+      'Points' => $this->input->post('poin')
     ];
+    // check($data);
     $this->Catatan_pelanggaran_M->updateCatatanPelanggaran($data);
     $this->session->set_flashdata('pesan', 'Berhasil diubah!');
     redirect('pelanggaran/catatan_pelanggaran');
@@ -63,6 +67,17 @@ class Catatan_pelanggaran extends CI_Controller
     $this->Catatan_pelanggaran_M->deleteCatatanPelanggaran($data);
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('pelanggaran/catatan_pelanggaran');
+  }
+
+  public function getPointById()
+  {
+    $IdJenisIqob = $this->input->post('IdJenisIqob');
+    $getPoin = $this->Catatan_pelanggaran_M->getPoinByIdIqob($IdJenisIqob);
+    $hasil = [
+      'Poin' => $getPoin['Poin']
+    ];
+    // check($getPoin);
+    echo json_encode($hasil);
   }
 }
 

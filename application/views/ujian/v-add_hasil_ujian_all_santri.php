@@ -74,7 +74,7 @@
                         <td><?= $ds['NamaKelas']; ?></td>
                         <td><?= $ds['Periode']; ?></td>
                         <td><?= $ds['total_nilai']; ?></td>
-                        <td><?= $ds['rata_rata']; ?></td>
+                        <td><?= round($ds['rata_rata'], 1); ?></td>
                         <?php
                         $reward = '';
                         if ($ds['Nilai'] >= 80 && $ds['Prosentase'] == 100) {

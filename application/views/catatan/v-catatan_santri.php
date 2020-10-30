@@ -118,7 +118,7 @@
         </div>
         <div class="form-group">
           <label for="catatan_musyrif">Catatan Musyrif</label>
-          <textarea name="catatan_musyrif" class="form-control" rows="4" placeholder="Jika ada catatan tambahan silahkan isi form ini, jika tidak bisa diabaikan."></textarea>
+          <textarea name="catatan_musyrif" class="form-control" rows="4" placeholder="Form ini digunakan untuk Catatan Jenis Catatan Musyrif."></textarea>
         </div>
       </div>
       <div class="modal-footer justify-content-between">

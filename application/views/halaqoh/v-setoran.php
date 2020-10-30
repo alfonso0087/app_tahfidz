@@ -168,12 +168,12 @@
                   <option value="<?= $str['IdDetailTarget']; ?>" selected><?= $str['IsiTarget']; ?> | <?= $str['Keterangan']; ?></option>
                   <option> -- Pilih Isi Target -- </option>
                   <?php foreach ($detail_target as $dt) : ?>
-                    <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
+                    <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['NamaKelas']; ?> | <?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
                   <?php endforeach; ?>
                 <?php else : ?>
                   <option> -- Pilih Isi Target -- </option>
                   <?php foreach ($detail_target as $dt) : ?>
-                    <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
+                    <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['NamaKelas']; ?> | <?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
                   <?php endforeach; ?>
                 <?php endif; ?>
               </select>

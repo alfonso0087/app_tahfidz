@@ -28,6 +28,15 @@ class Catatan_pelanggaran_M extends CI_Model
     $this->db->where('IdIqob', $data['IdIqob']);
     $this->db->delete('pelanggaran', $data);
   }
+
+  public function getPoinByIdIqob($IdIqob)
+  {
+    $Id_JenisIqob = $IdIqob;
+    $query = $this->db->query('SELECT * 
+    FROM `jenispelanggaran` 
+    WHERE `IdJenisIqob`="' . $Id_JenisIqob . '"');
+    return $query->row_array();
+  }
 }
 
 /* End of file Catatan_pelanggaran_M.php */

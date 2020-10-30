@@ -46,7 +46,7 @@
                         <?= $ru['NamaUjian']; ?> <br> <?= $ru['Keterangan']; ?>
                       </td>
                       <td><?= $ru['NamaLengkap']; ?></td>
-                      <td><?= $ru['Periode']; ?></td>
+                      <td><?= $ru['Periode']; ?>| <?= $ru['NamaKelas']; ?></td>
                       <td><?= $ru['Nilai']; ?></td>
                       <td><?= $ru['Predikat']; ?></td>
                       <td><b><?= $ru['ket_rekap']; ?></b></td>

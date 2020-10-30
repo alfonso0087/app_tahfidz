@@ -338,11 +338,10 @@
           </li>
           <!-- Raport -->
           <li class="nav-item mt-2">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-fw fa-th" style="color: white;"></i>
+            <a href="<?= base_url('raport'); ?>" class="nav-link <?= $url == "raport" ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-fw fa-file-archive" style="color: white;"></i>
               <p style="color: white;">
                 Raport
-
               </p>
             </a>
           </li>

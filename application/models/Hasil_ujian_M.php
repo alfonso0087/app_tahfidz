@@ -51,7 +51,7 @@ class Hasil_ujian_M extends CI_Model
     JOIN `periode` ON `periode`.`IdPeriode`=`periodeujian`.`IdPeriode`
     WHERE `kelas`.`IdKelas`="' . $IdKelas . '"
     AND `hasilujian`.`IdPeriodeUjian`="' . $IdPeriodeUjian . '"
-    ORDER BY Ranking ASC');
+    ORDER BY Ranking ASC,`kelas`.`IdKelas` ASC');
     return $query->result_array();
   }
 

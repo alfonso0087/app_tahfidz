@@ -49,7 +49,7 @@
                       <td><?= $hu['NamaKelas']; ?></td>
                       <td><?= $hu['periode']; ?></td>
                       <td><?= $hu['Total']; ?></td>
-                      <td><?= $hu['Rata-rata']; ?></td>
+                      <td><?= round($hu['Rata-rata'], 1); ?></td>
                       <td><?= $hu['Reward']; ?></td>
                       <td><?= $hu['Rangking']; ?></td>
                       <td>
