@@ -218,6 +218,7 @@ class Hasil_Ujian extends CI_Controller
         }
       }
     }
+
     // check($data);
     $this->Hasil_ujian_M->Update_Perankingan($data);
     $this->session->set_flashdata('pesan', 'Berhasil dirangking!');

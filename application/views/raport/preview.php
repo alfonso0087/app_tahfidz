@@ -53,7 +53,7 @@
           <tr>
             <td>PJ Halaqoh Tahfidz</td>
             <td>:</td>
-            <td> - </td>
+            <td> <?= $pj_halaqoh['PJHalaqoh']; ?></td>
           </tr>
         </table>
       </div>

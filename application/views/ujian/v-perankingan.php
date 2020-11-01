@@ -59,15 +59,17 @@
                     <?php
                     $no = 1;
                     if ($ranking_santri)
-                      foreach ($ranking_santri as $rs) : ?>
+                      $i = 1;
+                    $rangking = 1;
+                    foreach ($ranking_santri as $rs) : ?>
                       <tr>
                         <td><?= $no++; ?></td>
                         <td><?= $rs['NamaLengkap']; ?></td>
                         <td><?= $rs['NamaKelas']; ?></td>
                         <td><?= $rs['Periode']; ?></td>
-                        <td><?= $rs['Rata-rata']; ?></td>
+                        <td><?= round($rs['Rata-rata'], 1); ?></td>
                         <td><?= $rs['Reward']; ?></td>
-                        <td><?= $rs['Ranking']; ?></td>
+                        <td><?= $i++; ?></td>
                       </tr>
                       <input type="hidden" name="IdHasil[]" value="<?= $rs['IdHasil']; ?>">
                       <input type="hidden" name="IdSiswa[]" value="<?= $rs['IdSiswa']; ?>">
@@ -75,7 +77,7 @@
                       <input type="hidden" name="TotalNilai[]" value="<?= $rs['Total']; ?>">
                       <input type="hidden" name="RataRata[]" value="<?= $rs['Rata-rata']; ?>">
                       <input type="hidden" name="Reward[]" value="<?= $rs['Reward']; ?>">
-                      <input type="hidden" name="Ranking[]" value="<?= $rs['Ranking']; ?>">
+                      <input type="hidden" name="Ranking[]" value="<?= $rangking++; ?>">
                     <?php endforeach; ?>
 
                 </tbody>

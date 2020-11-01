@@ -22,6 +22,17 @@ class Raport_M extends CI_Model
     return $query->row_array();
   }
 
+  public function getRaportIdentitasSantriPjHalaqoh($id_siswa)
+  {
+    $query = 'SELECT `musyrif`.`NamaMusyrif` AS PJHalaqoh 
+    FROM `pjmusyrif`
+    JOIN `musyrif` ON `musyrif`.`IdMusyrif`=`pjmusyrif`.`IdMusyrif`
+    JOIN `detailkelompok` ON detailkelompok.IdKelompok=`pjmusyrif`.`IdKelompok`
+    JOIN `siswa` ON `siswa`.`IdSiswa`=`detailkelompok`.`IdSiswa`
+    WHERE `siswa`.`IdSiswa`="' . $id_siswa . '"';
+    return $this->db->query($query)->row_array();
+  }
+
   public function getRaportHasilUjian($id_siswa, $id_periode_ujian)
   {
     $query = 'SELECT `rekapsetoran`.`Prosentase`,`jenisujian`.`NamaUjian`,`rekapujian`.`Nilai`,`rekapujian`.`Predikat`,`rekapujian`.`Keterangan` AS Ket_RekapUjian,`targetujian`.`Keterangan`,`hasilujian`.`Total`,`hasilujian`.`Rata-rata`,`hasilujian`.`Rangking`,`hasilujian`.`Reward`

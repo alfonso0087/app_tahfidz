@@ -39,6 +39,7 @@ class Raport extends CI_Controller
 
     // Data-data Raport 
     $identitas_santri               = $this->Raport_M->getRaportIdentitasSantri($id_siswa, $id_periode_ujian);
+    $pj_halaqoh                     = $this->Raport_M->getRaportIdentitasSantriPjHalaqoh($id_siswa);
     $prosentase_target              = $this->Raport_M->getRaport_Prosentase($id_siswa, $id_periode_ujian);
     $hasilujian_santri              = $this->Raport_M->getRaportHasilUjian($id_siswa, $id_periode_ujian);
     $nilai_ujian                    = $this->Raport_M->getRaport_NilaiUjian($id_siswa, $id_periode_ujian);
@@ -59,6 +60,7 @@ class Raport extends CI_Controller
 
     $data = [
       'identitas_santri'      => $identitas_santri,
+      'pj_halaqoh'            => $pj_halaqoh,
       'prosentase_target'     => $prosentase_target,
       'hasil_ujian_santri'    => $hasilujian_santri,
       'nilai_ujian'           => $nilai_ujian,
