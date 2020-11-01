@@ -46,15 +46,48 @@ class Musyrif extends CI_Controller
   //Update one item
   public function update($id)
   {
-    $data = [
-      'IdMusyrif' => $id,
-      'NamaMusyrif' => $this->input->post('nama_musyrif'),
-      'Email' => $this->input->post('email'),
-      'NoHp' => $this->input->post('no_hp'),
-    ];
-    $this->Musyrif_M->updateMusyrif($data);
-    $this->session->set_flashdata('pesan', 'Berhasil diubah!');
-    redirect('musyrif');
+    $id_Musyrif = $id;
+    $nama = $this->input->post('nama_musyrif');
+    $email = $this->input->post('email');
+    $no_hp = $this->input->post('no_hp');
+    $tanda_tangan = $_FILES['ttd']['name'];
+
+    if ($tanda_tangan) {
+      $namafile                = "TTD_" . $nama;
+      $config['file_name']     = $namafile;
+      $config['upload_path']   = './assets/upload/ttd_musyrif/';
+      $config['allowed_types'] = '*';
+      $config['max_size']      = '2048';
+      $config['overwrite']     = true;
+
+      $this->load->library('upload', $config);
+      if ($this->upload->do_upload('ttd')) {
+        $file_ttd = $this->upload->data('file_name');
+        $data = [
+          'IdMusyrif' => $id_Musyrif,
+          'NamaMusyrif' => $nama,
+          'Email' => $email,
+          'NoHp' => $no_hp,
+          'Ttd' => $file_ttd
+        ];
+        $this->Musyrif_M->updateMusyrif($data);
+        $this->session->set_flashdata('pesan', 'Berhasil diubah!');
+        redirect('musyrif');
+      } else {
+        echo $this->upload->display_errors();
+        echo '<a href="' . base_url('musyrif') . '">Kembali</a>';
+      }
+    } else {
+      $data = [
+        'IdMusyrif' => $id_Musyrif,
+        'NamaMusyrif' => $nama,
+        'Email' => $email,
+        'NoHp' => $no_hp
+      ];
+      $this->Musyrif_M->updateMusyrif($data);
+      $this->session->set_flashdata('pesan', 'Berhasil diubah!');
+      redirect('musyrif');
+    }
   }
 
   //Delete one item

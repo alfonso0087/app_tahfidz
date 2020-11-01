@@ -54,7 +54,8 @@ class Raport extends CI_Controller
     $catatan_kerapian_kebersihan    = $this->Raport_M->getRaport_Catatan_KerapianKebersihan($id_siswa, $id_periode_ujian);
     $catatan_catatan_musyrif        = $this->Raport_M->getRaport_Catatan_CatatanMusyrif($id_siswa, $id_periode_ujian);
     $reward_ujian                   = $this->Raport_M->getRaport_Reward_Ujian($id_siswa, $id_periode_ujian);
-
+    $pengasuh_pondok                = $this->Raport_M->getRaport_Pengesahan_Pengasuh();
+    $direktur_tahfidz               = $this->Raport_M->getRaport_Pengesahan_Direktur();
 
     $data = [
       'identitas_santri'      => $identitas_santri,
@@ -72,9 +73,11 @@ class Raport extends CI_Controller
       'c_akhlaq_perilaku'     => $catatan_akhlaq_perilaku,
       'c_kerapian_kebersihan' => $catatan_kerapian_kebersihan,
       'c_catatan_musyrif'     => $catatan_catatan_musyrif,
-      'reward_ujian'          => $reward_ujian
+      'reward_ujian'          => $reward_ujian,
+      'pengasuh'              => $pengasuh_pondok,
+      'direktur'              => $direktur_tahfidz
     ];
-    // check($hasilujian_santri);
+    // check($data['pengasuh']);
     $this->load->view('raport/preview', $data);
   }
 }

@@ -7,7 +7,7 @@ class Raport_M extends CI_Model
 
   public function getRaportIdentitasSantri($id_siswa, $id_periode_ujian)
   {
-    $query = $this->db->query('SELECT `siswa`.`NIS`,`siswa`.`NamaLengkap`,`kelas`.`NamaKelas`,`kelas`.`Tingkat`,`kelompokhalaqoh`.`NamaKelompok`,`musyrif`.`NamaMusyrif`,`musyrif`.`NoHp`,`semester`.`Semester`,`periodeujian`.`KetPeriode`,`ajaran`.`ThAjaran`,`periode`.`Periode`
+    $query = $this->db->query('SELECT `siswa`.`NIS`,`siswa`.`NamaLengkap`,`kelas`.`NamaKelas`,`kelas`.`Tingkat`,`kelompokhalaqoh`.`NamaKelompok`,`musyrif`.`NamaMusyrif`,`musyrif`.`NoHp`,`musyrif`.`Ttd`,`semester`.`Semester`,`periodeujian`.`KetPeriode`,`ajaran`.`ThAjaran`,`periode`.`Periode`
     FROM `detailkelompok`
     JOIN `siswa` ON `siswa`.`IdSiswa`=`detailkelompok`.`IdSiswa`
     JOIN `kelas` ON `kelas`.`IdKelas`=`siswa`.`IdKelas`
@@ -181,6 +181,28 @@ class Raport_M extends CI_Model
     FROM `hasilujian`
     WHERE `IdSiswa`="' . $id_siswa . '"
     AND `IdPeriodeUjian`="' . $id_periode_ujian . '"';
+    return $this->db->query($query)->row_array();
+  }
+
+  public function getRaport_Pengesahan_Pengasuh()
+  {
+    $jabatan = 'Pengasuh PP Taruna Al Quran';
+    $Status  = 'Aktif';
+    $query = 'SELECT * 
+    FROM `pengesahan` 
+    WHERE `Jabatan`="' . $jabatan . '"
+    AND`Status`= "' . $Status . '"';
+    return $this->db->query($query)->row_array();
+  }
+
+  public function getRaport_Pengesahan_Direktur()
+  {
+    $jabatan = 'Direktur Tahfidzul Quran';
+    $Status  = 'Aktif';
+    $query = 'SELECT * 
+    FROM `pengesahan` 
+    WHERE `Jabatan`="' . $jabatan . '"
+    AND`Status`= "' . $Status . '"';
     return $this->db->query($query)->row_array();
   }
 }

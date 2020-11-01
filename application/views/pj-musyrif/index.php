@@ -14,42 +14,36 @@
             </div>
 
             <!-- Swall -->
-            <div class="flash-data" data-flashdata="<?= $this->session->flashdata('pesan'); ?>" data-title="Data Musyrif">
+            <div class="flash-data" data-flashdata="<?= $this->session->flashdata('pesan'); ?>" data-title="Data PJ Musyrif">
             </div>
             <div class="card-body">
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMusyrif"><i class="fas fa-plus"></i> Tambah Data</button>
-                <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importMusyrif"><i class="fas fa-fw fa-file-upload"></i> Import Data</button>
-                <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#exportMusyrif"><i class="fas fa-fw fa-file-download"></i> Export Data</button>
               </div>
 
               <table id="example2" class="table table-bordered table-striped text-center">
                 <thead>
                   <tr>
                     <th style="width: 50px;">No</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Kontak</th>
-                    <th>Tanda Tangan</th>
+                    <th>Nama Musyrif</th>
+                    <th>Jabatan</th>
+                    <th>Nama Santri</th>
                     <th style="width: 200px;">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $no = 1;
-                  foreach ($musyrif as $m) : ?>
+                  foreach ($pjmusyrif as $pm) : ?>
                     <tr>
                       <td><?= $no++; ?></td>
-                      <td><?= $m['NamaMusyrif']; ?></td>
-                      <td><?= $m['Email']; ?></td>
-                      <td><?= $m['NoHp']; ?></td>
+                      <td><?= $pm['NamaMusyrif']; ?></td>
+                      <td><?= $pm['JabatanTambahan']; ?></td>
+                      <td><?= $pm['NamaLengkap']; ?></td>
                       <td>
-                        <img src="<?= base_url('assets/upload/ttd_musyrif/' . $m['Ttd']); ?>" width="100px" height="100px">
-                      </td>
-                      <td>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editMusyrif<?= $m['IdMusyrif']; ?>">Ubah</button>
-                        <a href="<?= base_url('musyrif/delete/' . $m['IdMusyrif']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Musyrif" namaData=<?= $m['NamaMusyrif']; ?>>Hapus</a>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#editMusyrif<?= $pm['IdPjMusyrif']; ?>">Ubah</button>
+                        <a href="<?= base_url('musyrif/delete/' . $pm['IdPjMusyrif']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Musyrif" namaData=<?= $pm['NamaMusyrif']; ?>>Hapus</a>
                       </td>
                     </tr>
                   <?php endforeach; ?>
@@ -80,33 +74,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?= base_url('musyrif/add'); ?>" method="POST" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="nama_musyrif">Nama Lengkap</label>
-            <input type="text" class="form-control" id="nama_musyrif" placeholder="Nama Lengkap" name="nama_musyrif" required autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="Email" name="email" required autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label for="no_hp">No Handphone</label>
-            <input type="text" class="form-control" id="no_hp" placeholder="No Handphone" name="no_hp" required autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small></label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewTtd()" required>
-              <label class="custom-file-label" for="customFile">Pilih Gambar</label>
-            </div>
-          </div>
+        <?= form_open('musyrif/add'); ?>
+        <div class="form-group">
+          <label for="nama_musyrif">Nama Lengkap</label>
+          <input type="text" class="form-control" id="nama_musyrif" placeholder="Nama Lengkap" name="nama_musyrif" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" placeholder="Email" name="email" required autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="no_hp">No Handphone</label>
+          <input type="text" class="form-control" id="no_hp" placeholder="No Handphone" name="no_hp" required autocomplete="off">
+        </div>
 
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
       </div>
-      </form>
+      <?= form_close(); ?>
     </div>
     <!-- /.modal-content -->
   </div>
@@ -114,7 +101,7 @@
 </div>
 <!-- /.modal -->
 
-<!-- Modal ImportMusyrif -->
+<!-- Modal ImportSiswa -->
 <div class="modal fade" id="importMusyrif">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -210,7 +197,7 @@ foreach ($musyrif as $m) : ?>
         </div>
         <div class="modal-body">
 
-          <?= form_open_multipart('musyrif/update/' . $m['IdMusyrif']); ?>
+          <?= form_open('musyrif/update/' . $m['IdMusyrif']); ?>
           <div class="form-group">
             <label for="nama_musyrif">Nama Lengkap</label>
             <input type="text" class="form-control" id="nama_musyrif" name="nama_musyrif" value="<?= $m['NamaMusyrif']; ?>" required autofocus>
@@ -222,13 +209,6 @@ foreach ($musyrif as $m) : ?>
           <div class="form-group">
             <label for="no_hp">No Handphone</label>
             <input type="text" class="form-control" id="no_hp" placeholder="No Handphone" name="no_hp" value="<?= $m['NoHp']; ?>" required autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <?= $m['Ttd'] ? 'Tanda Tangan sudah tersimpan' : ''; ?></label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewFile()" required>
-              <label class="custom-file-label" for="customFile">Pilih Gambar</label>
-            </div>
           </div>
 
         </div>
@@ -244,13 +224,3 @@ foreach ($musyrif as $m) : ?>
   </div>
 <?php endforeach; ?>
 <!-- /.modal -->
-
-<script>
-  function previewTtd() {
-    const importfile = document.querySelector('#ttd');
-    const importLabel = document.querySelector('.custom-file-label');
-
-    // ! Cannot read property 'files' of null
-    importLabel.textContent = importfile.files[0].name;
-  }
-</script>

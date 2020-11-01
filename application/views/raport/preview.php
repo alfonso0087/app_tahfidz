@@ -309,7 +309,7 @@
         <table class="table table-bordered">
           <tr>
             <td>
-              <b><?= $reward_ujian['Reward']; ?></b>
+              <b><?= $reward_ujian['Reward'] != null ? $reward_ujian['Reward'] : ''; ?></b>
             </td>
           </tr>
         </table>
@@ -327,26 +327,31 @@
     <div class="col-sm-4">
       <table>
         <tr>
-          <td>Pengasuh PP Taruna Al-Qur'an</td>
+          <td><?= $pengasuh['Jabatan']; ?></td>
         </tr>
         <tr>
-          <td class="text-center"><img src="<?= base_url('assets/'); ?>img/logo pp.jpeg" width="100px"></td>
+          <td class="text-center"><img src="<?= base_url('assets/upload/ttd/' . $pengasuh['Ttd']); ?>" width="100px"></td>
         </tr>
         <tr>
-          <td class="text-center">Nama 1 <br> NIP</td>
+          <td class=""><?= $pengasuh['Nama']; ?><br> NIP. <?= $pengasuh['Nip']; ?></td>
         </tr>
       </table>
     </div>
     <div class="col-sm-4">
       <table>
         <tr>
-          <td>Direktur Tahfidzul Al-Qur'an</td>
+          <td><?= $direktur['Jabatan'] ? $direktur['Jabatan'] : 'Aktifkan Status Direktur'; ?></td>
         </tr>
         <tr>
-          <td class="text-center"><img src="<?= base_url('assets/'); ?>img/logo pp.jpeg" width="100px"></td>
+          <td class="text-center">
+            <?php if ($direktur['Ttd']) : ?>
+              <img src="<?= base_url('assets/upload/ttd/' . $direktur['Ttd']); ?>" width="100px"></td>
+        <?php else : ?>
+          'Aktifkan Status Direktur'
+        <?php endif; ?>
         </tr>
         <tr>
-          <td class="text-center mt-2">Nama 2 <br> NIP</td>
+          <td class=" mt-2"><?= $direktur['Nama'] ? $direktur['Nama'] : 'Aktifkan Status Direktur'; ?> <br> NIP. <?= $direktur['Nip'] ? $direktur['Nip'] : 'Aktifkan Status Direktur'; ?></td>
         </tr>
       </table>
     </div>
@@ -356,17 +361,16 @@
           <td>Musyrif Halaqoh <?= $identitas_santri['NamaKelompok']; ?></td>
         </tr>
         <tr>
-          <td class="text-center"><img src="<?= base_url('assets/'); ?>img/logo pp.jpeg" width="100px"></td>
+          <td class="text-center">
+            <img src="<?= base_url('assets/upload/ttd_musyrif/' . $identitas_santri['Ttd']); ?>" width="100px">
+          </td>
         </tr>
         <tr>
-          <td class="text-center mt-2"><?= $identitas_santri['NamaMusyrif']; ?> <br> -</td>
+          <td class="mt-2"><?= $identitas_santri['NamaMusyrif']; ?> <br>NIP. - </td>
         </tr>
       </table>
     </div>
   </div>
-
-
-
 
 
   <!-- Optional JavaScript; choose one of the two! -->

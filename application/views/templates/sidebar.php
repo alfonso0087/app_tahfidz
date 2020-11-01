@@ -23,31 +23,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar nav-child-indent nav-flat flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <!-- <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
+          <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
           <!-- Dashboard -->
           <?php
           $url = $this->uri->segment(1);
@@ -87,6 +63,15 @@
               <i class="nav-icon fas fa-fw fa-chalkboard-teacher" style="color: white;"></i>
               <p style="color: white;">
                 Musyrif
+              </p>
+            </a>
+          </li>
+          <!-- PJ Musyrif -->
+          <li class="nav-item mt-2">
+            <a href="<?= base_url('pj_musyrif'); ?>" class="nav-link <?= $url == "pj_musyrif" ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-fw fa-user-tie" style="color: white;"></i>
+              <p style="color: white;">
+                PJ Musyrif
               </p>
             </a>
           </li>
@@ -335,6 +320,15 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <!-- Pengesahan -->
+          <li class="nav-item mt-2">
+            <a href="<?= base_url('pengesahan'); ?>" class="nav-link <?= $url == "pengesahan" ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-fw fa-file-contract" style="color: white;"></i>
+              <p style="color: white;">
+                Pengesahan
+              </p>
+            </a>
           </li>
           <!-- Raport -->
           <li class="nav-item mt-2">
