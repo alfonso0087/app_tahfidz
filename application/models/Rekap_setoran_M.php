@@ -30,6 +30,23 @@ class Rekap_setoran_M extends CI_Model
   {
     $this->db->insert_batch('rekapsetoran', $data);
   }
+
+
+  public function getRekapSetoranBy_Kelompok_Periode($IdPeriode, $IdKelompok)
+  {
+    $query = 'SELECT `siswa`.`NamaLengkap`,`rekapsetoran`.`JmlSetoran`,`rekapsetoran`.`PekanRekap`,`rekapsetoran`.`Prosentase`,`rekapsetoran`.`Hasil`
+    FROM `rekapsetoran`
+    JOIN `siswa` ON `siswa`.`IdSiswa`=`rekapsetoran`.`IdSiswa`
+    JOIN `detailkelompok` ON `siswa`.`IdSiswa`=`detailkelompok`.`IdSiswa`
+    JOIN `kelompokhalaqoh` ON `kelompokhalaqoh`.`IdKelompok`=`detailkelompok`.`IdKelompok`
+    JOIN `target` ON `target`.`IdKelas`=`siswa`.`IdKelas`
+    JOIN `periode` ON `periode`.`IdPeriode`=`target`.`IdPeriode`
+    JOIN `periodeujian` ON `periode`.`IdPeriode`=`periodeujian`.`IdPeriode`
+    WHERE `target`.`IdPeriode`="' . $IdPeriode . '"
+    AND `detailkelompok`.`IdKelompok`="' . $IdKelompok . '"
+    GROUP BY `siswa`.`IdSiswa`';
+    return $this->db->query($query)->result_array();
+  }
 }
 
 // COALESCE(COUNT(*),0) jumlah_setoran
