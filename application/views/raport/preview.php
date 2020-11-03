@@ -316,57 +316,36 @@
       </div>
     </div>
   </div>
-  <br><br>
+  <br>
 
-  <div class="row ml-4 pl-4 mr-4">
-    <div class="col-sm-4">Mengetahui</div>
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">Sleman, <?= date_indo(date('Y-m-d')); ?></div>
-  </div>
-  <div class="row ml-4 pl-4 mr-4 mt-2">
-    <div class="col-sm-4">
-      <table>
+  <div class="row ml-4 pl-2">
+    <div class="col">
+      <!-- Bagian Pengesahan -->
+      <table class="table table-borderless">
+        <tr>
+          <td>Mengetahui</td>
+          <td></td>
+          <td>Sleman, <?= date_indo(date('Y-m-d')); ?></td>
+        </tr>
         <tr>
           <td><?= $pengasuh['Jabatan']; ?></td>
-        </tr>
-        <tr>
-          <td class="text-center"><img src="<?= base_url('assets/upload/ttd/' . $pengasuh['Ttd']); ?>" width="100px"></td>
-        </tr>
-        <tr>
-          <td class=""><?= $pengasuh['Nama']; ?><br> NIP. <?= $pengasuh['Nip']; ?></td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-sm-4">
-      <table>
-        <tr>
           <td><?= $direktur['Jabatan'] ? $direktur['Jabatan'] : 'Aktifkan Status Direktur'; ?></td>
-        </tr>
-        <tr>
-          <td class="text-center">
-            <?php if ($direktur['Ttd']) : ?>
-              <img src="<?= base_url('assets/upload/ttd/' . $direktur['Ttd']); ?>" width="100px"></td>
-        <?php else : ?>
-          'Aktifkan Status Direktur'
-        <?php endif; ?>
-        </tr>
-        <tr>
-          <td class=" mt-2"><?= $direktur['Nama'] ? $direktur['Nama'] : 'Aktifkan Status Direktur'; ?> <br> NIP. <?= $direktur['Nip'] ? $direktur['Nip'] : 'Aktifkan Status Direktur'; ?></td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-sm-4">
-      <table>
-        <tr>
           <td>Musyrif Halaqoh <?= $identitas_santri['NamaKelompok']; ?></td>
         </tr>
         <tr>
-          <td class="text-center">
-            <img src="<?= base_url('assets/upload/ttd_musyrif/' . $identitas_santri['Ttd']); ?>" width="100px">
-          </td>
+          <td class=""><img src="<?= base_url('assets/upload/ttd/' . $pengasuh['Ttd']); ?>" width="100px"></td>
+          <td class=""><img src="<?= base_url('assets/upload/ttd/' . $direktur['Ttd']); ?>" width="100px"></td>
+          <td class=""><img src="<?= base_url('assets/upload/ttd_musyrif/' . $identitas_santri['Ttd']); ?>" width="100px"></td>
         </tr>
         <tr>
-          <td class="mt-2"><?= $identitas_santri['NamaMusyrif']; ?> <br>NIP. - </td>
+          <td class=""><?= $pengasuh['Nama']; ?></td>
+          <td class=""><?= $direktur['Nama'] ?></td>
+          <td class=""><?= $identitas_santri['NamaMusyrif']; ?></td>
+        </tr>
+        <tr>
+          <td>NIP. <?= $pengasuh['Nip']; ?></td>
+          <td>NIP. <?= $direktur['Nip']; ?></td>
+          <td>NIP. -</td>
         </tr>
       </table>
     </div>

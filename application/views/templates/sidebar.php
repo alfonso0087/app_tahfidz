@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-primary elevation-4" style="background-color: #172a3a;">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="background-color: #172a3a;">
+    <a href="#" class="brand-link" style="background-color: #172a3a;">
       <img src="<?= base_url('assets/'); ?>img/logo pp.jpeg" alt="AdminLTE Logo" class="brand-image img-circle ">
       <span class="brand-text font-weight-bold" style="color: white;">Tahfidz App</span>
     </a>

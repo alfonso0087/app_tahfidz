@@ -8,7 +8,7 @@
         <!-- /.col-md-6 -->
         <div class="col-sm">
           <div class="card">
-            <div class="card-header" style="background-color: #74b3ce;">
+            <div class="card-header bg-success">
               <h4 class="m-0" style="color: white;">Rekap Setoran Santri Per Kelompok Pada Periode Tertentu</h4>
             </div>
             <div class="card-body">

@@ -17,7 +17,7 @@
            PP Taruna Al Qur'an Putera
          </div>
          <!-- Default to the left -->
-         <strong>Copyright &copy; 2020 - <?= date('Y'); ?> <a href="https://adminlte.io">Pengabdian Masyarakat</a>.</strong>
+         <strong>Copyright &copy; 2020 - <?= date('Y'); ?> <a href="https://github.com/alfonso0087/app_tahfidz">Pengabdian Masyarakat</a>.</strong>
        </footer>
        </div>
        <!-- ./wrapper -->
