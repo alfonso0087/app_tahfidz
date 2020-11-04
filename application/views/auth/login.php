@@ -48,7 +48,7 @@
               <div class="row">
                 <?= form_error('username', '<small class="text-danger">', '</small>'); ?>
                 <div class="input-group mb-3 col-auto">
-                  <input type="text" class="form-control" placeholder="Username" name="username" autofocus required autocomplete="off">
+                  <input type="text" class="form-control" placeholder="Username/Email" name="username" autofocus required autocomplete="off">
 
                 </div>
 

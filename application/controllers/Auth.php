@@ -56,7 +56,7 @@ class Auth extends CI_Controller
           redirect('Administrasi');
         } else {
           // Arahkan ke halaman Wali
-          redirect('wali');
+          redirect('Wali');
         }
       } else {
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah!</div>');

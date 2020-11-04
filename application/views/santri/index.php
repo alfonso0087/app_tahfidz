@@ -19,8 +19,8 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSiswa"><i class="fas fa-plus"></i> Tambah Data</button>
-                <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importSiswa"><i class="fas fa-fw fa-file-upload"></i> Import Data</button>
-                <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#exportSiswa"><i class="fas fa-fw fa-file-download"></i> Export Data</button>
+                <!-- <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importSiswa"><i class="fas fa-fw fa-file-upload"></i> Import Data</button>
+                <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#exportSiswa"><i class="fas fa-fw fa-file-download"></i> Export Data</button> -->
               </div>
 
               <table id="example2" class="table table-bordered table-striped text-center">
@@ -105,6 +105,14 @@
               <option value="<?= $kls['IdKelas']; ?>"><?= $kls['NamaKelas']; ?>/<?= $kls['Tingkat']; ?>/<?= $kls['Kampus']; ?></option>
             <?php endforeach; ?>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" placeholder="Masukkan Email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Masukkan Password" name="password" required>
         </div>
       </div>
       <div class="modal-footer justify-content-between">

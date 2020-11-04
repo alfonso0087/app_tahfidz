@@ -16,7 +16,6 @@
         <li class="nav-item dropdown mr-3">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fw fa-user"></i> <?= $user['level']; ?>
-
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <div class="dropdown-divider"></div>
