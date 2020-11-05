@@ -8,10 +8,11 @@
         <!-- /.col-md-6 -->
         <div class="col-sm">
           <div class="card">
-            <div class="card-header" style="background-color: #74b3ce;">
+            <div class="card-header bg-success">
               <h4 class="m-0" style="color: white;"><?= $title; ?></h4>
             </div>
             <div class="card-body">
+              <?= $this->session->flashdata('pesan'); ?>
 
               <form action="<?= base_url('Wali/preview'); ?>" method="POST">
                 <input type="hidden" name="IdSiswa" value="<?= $user['IdSiswa']; ?>">

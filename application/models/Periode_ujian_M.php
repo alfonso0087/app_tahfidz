@@ -15,6 +15,19 @@ class Periode_ujian_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getPeriodeUjianById($IdPeriodeUjian)
+  {
+    $query = 'SELECT `periodeujian`.*,`ajaran`.`ThAjaran`,`semester`.`Semester`,`kelas`.`IdKelas`,`kelas`.`NamaKelas`
+    FROM `periodeujian`
+    JOIN `periode` ON `periode`.`IdPeriode`=`periodeujian`.`IdPeriode`
+    JOIN `ajaran` ON `ajaran`.`IdAjaran`=`periodeujian`.`IdAjaran`
+    JOIN `semester` ON `semester`.`IdSemester`=`periodeujian`.`IdSemester`
+    JOIN `kelas` ON `kelas`.`IdKelas`=`periodeujian`.`IdKelas`
+    WHERE `periodeujian`.`IdPeriodeUjian`="' . $IdPeriodeUjian . '"';
+    return $this->db->query($query)->row_array();
+  }
+
+
   public function addPeriodeUjian($data)
   {
     $this->db->insert('periodeujian', $data);
