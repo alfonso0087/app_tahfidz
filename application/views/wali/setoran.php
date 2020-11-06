@@ -36,7 +36,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-sm-8 text-right">
+                  <div class="col-sm-8">
                     <button class="btn btn-primary" type="submit">Tampil Setoran</button>
                   </div>
                 </div>

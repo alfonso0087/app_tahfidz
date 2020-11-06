@@ -29,7 +29,7 @@
                     <?php endforeach; ?>
                   </select>
                 </div>
-                <div class="pull-right">
+                <div>
                   <button type="submit" id="tampil_raport" class="btn btn-primary"><i class="far fa-fw fa-file-pdf"></i>Tampil Raport</button>
                 </div>
               </form>
