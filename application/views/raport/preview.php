@@ -13,6 +13,107 @@
 </head>
 
 <body>
+  <!-- Halaman Cover -->
+  <!-- Header -->
+  <div class="row text-center pt-4" style="font-size: 28px; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+    <div class="col">
+      <p style="font-size: 36px; font-weight: bold; font-family: 'Times New Roman', Times, serif;">Laporan Perkembangan Belajar Anak</p>
+      <p style="font-size: 24px; font-weight: bold; font-family: 'Times New Roman', Times, serif;">PONDOK PESANTREN TARUNA AL QURAN <?= $identitas_santri['Kampus'] == "Kampus 1" ? '1' : '2'; ?> </p>
+      <p style="font-size: 24px; font-weight: bold; font-family: 'Times New Roman', Times, serif;">YOGYAKARTA</p>
+    </div>
+  </div>
+  <!-- /. Header -->
+  <!-- Logo -->
+  <div class="row text-center pt-4">
+    <div class="col">
+      <center>
+        <table class="pt-3">
+          <td>
+            <img src="<?= base_url('assets/'); ?>img/logo pp.jpeg" width="350px" height="350px" alt="Logo PonPes Putra Taruna Alqur'an">
+          </td>
+        </table>
+
+    </div>
+    </center>
+  </div>
+  <!-- /. Logo -->
+  <!-- Field Keterangan Ujian -->
+  <!-- Ujian Pondok Ke Berapa -->
+  <div class="row text-center mt-4 pt-3">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+      <div class="card" style="border-radius: 25px; border-width: 2px;">
+        <div class="card-body">
+          <p style="text-underline-position: auto; font-size: 20px;font-family: 'Times New Roman', Times, serif;"><u>Ujian Pondok Ke :</u></p>
+          <p style="font-weight: bold;font-size: 22px;font-family: 'Times New Roman', Times, serif;"><?= $identitas_santri['KetPeriode']; ?></p>
+          <p style="font-size: 20px;font-family: 'Times New Roman', Times, serif;"><u>Periode Bulan :</u></p>
+          <p style="font-weight: bold;font-size: 22px;font-family: 'Times New Roman', Times, serif;"><?= $identitas_santri['Periode']; ?></p>
+          <p style="font-size: 20px;font-family: 'Times New Roman', Times, serif;"><u>Kelas :</u></p>
+          <p style="font-weight: bold;font-size: 22px;font-family: 'Times New Roman', Times, serif;"><?= $identitas_santri['NamaKelas']; ?> (<?= $identitas_santri['Tingkat']; ?>) Taruna AlQur'an</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+    </div>
+
+  </div>
+  <!-- /. Ujian Pondok Ke Berapa -->
+  <!-- Nama Peserta Didik -->
+  <div class="row text-center mt-4 pt-3">
+    <div class="col">
+      <p style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">Nama Peserta Didik</p>
+    </div>
+  </div>
+  <div class="row text-center mt-2">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+      <div class="card" style="border-radius: 25px; border-width: 2px;">
+        <div class="card-body">
+          <p style="font-weight: bold;font-size: 20px;font-family: 'Times New Roman', Times, serif;"><?= $identitas_santri['NamaLengkap']; ?></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+    </div>
+
+  </div>
+  <!-- /. Nama Peserta Didik -->
+  <!-- NIS Santri -->
+  <div class="row text-center mt-4 pt-3">
+    <div class="col">
+      <p style="font-size: 18px; font-family: 'Times New Roman', Times, serif;">Nomor Induk Santri</p>
+    </div>
+  </div>
+  <div class="row text-center mt-2">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+      <div class="card" style="border-radius: 25px; border-width: 2px;">
+        <div class="card-body">
+          <p style="font-weight: bold;font-size: 20px;font-family: 'Times New Roman', Times, serif;"><?= $identitas_santri['NIS']; ?></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+    </div>
+
+  </div>
+  <!-- /. NIS Santri -->
+  <!-- Info Tambahan -->
+  <div class="row pt-4 mt-4 mb-5 text-center">
+    <div class="col">
+      <p style="font-weight: bold; font-size: 16px;">Head Ofice:</p>
+      <p>Jl. Lempongsari 4A Sariharjo, Ngaglik, Sleman, Yogyakarta 55581</p>
+      <p>www.taruna-alquran.com</p>
+    </div>
+  </div>
+  <br>
+  <!-- /. Info Tambahan -->
+  <!-- /.Halaman Cover -->
+
+
   <center>
     <div class="row pt-3">
       <div class="col">

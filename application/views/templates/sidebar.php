@@ -31,7 +31,7 @@
           ?>
           <?php if ($user['level'] == 'Bagian Administrasi') : ?>
             <li class="nav-item mt-2">
-              <a href="<?= base_url('administrasi'); ?>" class="nav-link <?= $url == "administrasi" ? 'active' : ''; ?>">
+              <a href="<?= base_url('Administrasi'); ?>" class="nav-link <?= $url == "Administrasi" ? 'active' : ''; ?>">
                 <i class="nav-icon fas fa-fw fa-home" style="color: white;"></i>
                 <p style="color: white;">
                   Dashboard Administrasi

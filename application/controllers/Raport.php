@@ -57,6 +57,7 @@ class Raport extends CI_Controller
     $reward_ujian                   = $this->Raport_M->getRaport_Reward_Ujian($id_siswa, $id_periode_ujian);
     $pengasuh_pondok                = $this->Raport_M->getRaport_Pengesahan_Pengasuh();
     $direktur_tahfidz               = $this->Raport_M->getRaport_Pengesahan_Direktur();
+    // check($identitas_santri);
 
     $data = [
       'identitas_santri'      => $identitas_santri,

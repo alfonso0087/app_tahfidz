@@ -7,7 +7,7 @@ class Raport_M extends CI_Model
 
   public function getRaportIdentitasSantri($id_siswa, $id_periode_ujian)
   {
-    $query = $this->db->query('SELECT `siswa`.`NIS`,`siswa`.`NamaLengkap`,`kelas`.`NamaKelas`,`kelas`.`Tingkat`,`kelompokhalaqoh`.`NamaKelompok`,`musyrif`.`NamaMusyrif`,`musyrif`.`NoHp`,`musyrif`.`Ttd`,`semester`.`Semester`,`periodeujian`.`KetPeriode`,`ajaran`.`ThAjaran`,`periode`.`Periode`
+    $query = $this->db->query('SELECT `siswa`.`NIS`,`siswa`.`NamaLengkap`,`kelas`.`NamaKelas`,`kelas`.`Tingkat`,`kelas`.`Kampus`,`kelompokhalaqoh`.`NamaKelompok`,`musyrif`.`NamaMusyrif`,`musyrif`.`NoHp`,`musyrif`.`Ttd`,`semester`.`Semester`,`periodeujian`.`KetPeriode`,`ajaran`.`ThAjaran`,`periode`.`Periode`
     FROM `detailkelompok`
     JOIN `siswa` ON `siswa`.`IdSiswa`=`detailkelompok`.`IdSiswa`
     JOIN `kelas` ON `kelas`.`IdKelas`=`siswa`.`IdKelas`

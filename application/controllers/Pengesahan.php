@@ -70,11 +70,11 @@ class Pengesahan extends CI_Controller
     $nip = $this->input->post('nip');
     $tanda_tangan = $_FILES['ttd']['name'];
     $status = $this->input->post('status');
-    // check($nama);
+    // check($tanda_tangan);
 
     if ($tanda_tangan) {
-      $namafile                = "TTD_" . $nama;
-      $config['file_name']     = $namafile;
+      // $namafile                = "TTD_" . $nama;
+      // $config['file_name']     = $namafile;
       $config['upload_path']   = './assets/upload/ttd/';
       $config['allowed_types'] = '*';
       $config['max_size']      = '2048';
