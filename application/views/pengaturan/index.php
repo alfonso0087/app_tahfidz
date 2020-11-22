@@ -86,6 +86,7 @@
             <option value="Admin">Admin</option>
             <option value="Bagian Administrasi">Bagian Administrasi</option>
             <option value="Wali">Wali</option>
+            <option value="Musyrif">Musyrif</option>
           </select>
         </div>
         <div class="form-group">
@@ -133,16 +134,25 @@ foreach ($pengguna as $usr) : ?>
                 <option value="Admin" selected>Admin</option>
                 <option value="Bagian Administrasi">Bagian Administrasi</option>
                 <option value="Wali">Wali</option>
+                <option value="Musyrif">Musyrif</option>
               <?php elseif ($usr['level'] == "Bagian Administrasi") : ?>
                 <option> -- Pilih Level -- </option>
                 <option value="Admin">Admin</option>
                 <option value="Bagian Administrasi" selected>Bagian Administrasi</option>
                 <option value="Wali">Wali</option>
-              <?php else : ?>
+                <option value="Musyrif">Musyrif</option>
+              <?php elseif ($usr['level'] == "Wali") : ?>
                 <option> -- Pilih Level -- </option>
                 <option value="Admin">Admin</option>
                 <option value="Bagian Administrasi">Bagian Administrasi</option>
                 <option value="Wali" selected>Wali</option>
+                <option value="Musyrif">Musyrif</option>
+              <?php else : ?>
+                <option> -- Pilih Level -- </option>
+                <option value="Admin">Admin</option>
+                <option value="Bagian Administrasi">Bagian Administrasi</option>
+                <option value="Wali">Wali</option>
+                <option value="Musyrif" selected>Musyrif</option>
               <?php endif; ?>
             </select>
           </div>

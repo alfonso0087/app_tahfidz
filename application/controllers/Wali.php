@@ -19,16 +19,16 @@ class Wali extends CI_Controller
   public function index()
   {
     $IdSiswa = $this->input->get('IdSiswa');
-    $Pekan = $this->input->get('pekan');
+    // $Pekan = $this->input->get('pekan');
     $IdPeriode = $this->input->get('periode');
-    $cek = [
-      'IdSiswa' => $IdSiswa,
-      'Pekan' => $Pekan,
-      'IdPeriode' => $IdPeriode
-    ];
+    // $cek = [
+    //   'IdSiswa' => $IdSiswa,
+    //   'Pekan' => $Pekan,
+    //   'IdPeriode' => $IdPeriode
+    // ];
     // check($cek);
 
-    if (!$IdSiswa && $Pekan && $IdPeriode) {
+    if (!$IdSiswa && $IdPeriode) {
       $username =  $this->session->userdata('username');
       $data = [
         'title' => 'Dashboard Wali',
@@ -39,6 +39,8 @@ class Wali extends CI_Controller
         'jumlah_setoran' => '',
         'setoran_selesai' => '',
         'setoran_tidak_selesai' => '',
+        'rekap_setoran_selesai' => '',
+        'rekap_setoran_tidak_selesai' => '',
         'isi' => 'wali/dashboard',
       ];
       // check($data['user']);
@@ -50,10 +52,12 @@ class Wali extends CI_Controller
         'user' => $this->Wali_M->getDataWali($username),
         'pekan' => $this->Wali_M->getPekanSetoran(),
         'periode' => $this->Periode_M->getAllPeriode(),
-        'setoran_santri' => $this->Wali_M->getDataRekapSetoranSantri($IdSiswa, $IdPeriode, $Pekan),
-        'jumlah_setoran' => $this->Wali_M->getJumlahSetoranSantri($IdSiswa, $IdPeriode, $Pekan),
-        'setoran_selesai' => $this->Wali_M->getJumlahSetoranSelesai($IdSiswa, $IdPeriode, $Pekan),
-        'setoran_tidak_selesai' => $this->Wali_M->getJumlahSetoranTidakSelesai($IdSiswa, $IdPeriode, $Pekan),
+        'setoran_santri' => $this->Wali_M->getDataRekapSetoranSantri($IdSiswa, $IdPeriode),
+        'jumlah_setoran' => $this->Wali_M->getJumlahSetoranSantri($IdSiswa, $IdPeriode),
+        'setoran_selesai' => $this->Wali_M->getJumlahSetoranSelesai($IdSiswa, $IdPeriode),
+        'setoran_tidak_selesai' => $this->Wali_M->getJumlahSetoranTidakSelesai($IdSiswa, $IdPeriode),
+        'rekap_setoran_selesai' => $this->Wali_M->getSetoranSantri_Selesai($IdSiswa, $IdPeriode),
+        'rekap_setoran_tidak_selesai' => $this->Wali_M->getSetoranSantri_TidakSelesai($IdSiswa, $IdPeriode),
         'isi' => 'wali/dashboard',
       ];
       // check($data['user']);

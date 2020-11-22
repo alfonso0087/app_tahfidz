@@ -29,7 +29,7 @@
       <center>
         <table class="pt-3">
           <td>
-            <img src="<?= base_url('assets/'); ?>img/logo pp.jpeg" width="350px" height="350px" alt="Logo PonPes Putra Taruna Alqur'an">
+            <img src="<?= base_url('assets/'); ?>img/Logo Cover Raport.png" width="350px" height="350px" alt="Logo PonPes Putra Taruna Alqur'an">
           </td>
         </table>
 

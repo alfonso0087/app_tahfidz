@@ -12,7 +12,7 @@
               <h4 class="m-0" style="color: white;">Rekap Setoran Santri Per Kelompok Pada Periode Tertentu</h4>
             </div>
             <div class="card-body">
-              <form action="<?= base_url('admin'); ?>">
+              <form action="<?= base_url('Halaman_Musyrif'); ?>">
                 <!-- Periode -->
                 <div class="form-group row">
                   <div class="col-sm-4">

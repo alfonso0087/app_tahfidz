@@ -36,23 +36,23 @@ class Santri extends CI_Controller
   // Add a new item
   public function add()
   {
-    $data = [
-      'NIS' => $this->input->post('nis'),
-      'NamaLengkap' => $this->input->post('nama'),
-      'Status' => $this->input->post('status'),
-      'IdKelas' => $this->input->post('kelas'),
-    ];
-    $IdSiswa = $this->Santri_M->addSantri($data);
-
     // Data untuk wali santri
     $dataWali = [
-      'IdSiswa' => $IdSiswa,
       'username' => $this->input->post('email'),
       'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
       'level' => 'Wali',
     ];
     // check($dataWali);
-    $this->Santri_M->addWaliSantri($dataWali);
+
+    $Id_User = $this->Santri_M->addWaliSantri($dataWali);
+    $data = [
+      'IdUser' => $Id_User,
+      'NIS' => $this->input->post('nis'),
+      'NamaLengkap' => $this->input->post('nama'),
+      'Status' => $this->input->post('status'),
+      'IdKelas' => $this->input->post('kelas'),
+    ];
+    $this->Santri_M->addSantri($data);
     $this->session->set_flashdata('pesan', 'Berhasil ditambahkan!');
     redirect('santri');
   }

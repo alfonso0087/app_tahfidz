@@ -56,7 +56,9 @@
                   <tr>
                     <th style="width: 50px;">No</th>
                     <th>Nama Santri</th>
-                    <th>Jumlah Setoran</th>
+                    <th>Jumlah Target</th>
+                    <th>Jumlah Target Selesai</th>
+                    <th>Jumlah Target Tidak Selesai</th>
                     <th>Pekan</th>
                     <th>Prosentase</th>
                     <th>Hasil</th>
@@ -70,7 +72,9 @@
                     <tr>
                       <td><?= $no++; ?></td>
                       <td><?= $rekap['NamaLengkap']; ?></td>
+                      <td><?= $rekap['JmlTugas']; ?></td>
                       <td><?= $rekap['JmlSetoran']; ?></td>
+                      <td><?= $rekap['Tidak_Selesai'] == 0 ? '-' : $rekap['Tidak_Selesai']; ?></td>
                       <td><?= $rekap['PekanRekap']; ?></td>
                       <td><?= $rekap['Prosentase']; ?></td>
                       <td><?= $rekap['Hasil']; ?></td>

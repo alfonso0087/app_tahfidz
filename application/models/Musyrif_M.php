@@ -11,6 +11,21 @@ class Musyrif_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getDataMusyrif($username)
+  {
+    $query = 'SELECT `login`.*,`musyrif`.*
+    FROM `login`
+    JOIN `musyrif` ON `musyrif`.`IdUser`=`login`.`IdUser`
+    WHERE `login`.`username`="' . $username . '"';
+    return $this->db->query($query)->row_array();
+  }
+
+  public function addLoginMusyrif($data_login)
+  {
+    $this->db->insert('login', $data_login);
+    return $this->db->insert_id();
+  }
+
   public function addMusyrif($data)
   {
     $this->db->insert('musyrif', $data);

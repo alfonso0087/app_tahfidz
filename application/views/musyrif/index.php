@@ -20,8 +20,8 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMusyrif"><i class="fas fa-plus"></i> Tambah Data</button>
-                <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importMusyrif"><i class="fas fa-fw fa-file-upload"></i> Import Data</button>
-                <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#exportMusyrif"><i class="fas fa-fw fa-file-download"></i> Export Data</button>
+                <!-- <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importMusyrif"><i class="fas fa-fw fa-file-upload"></i> Import Data</button>
+                <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#exportMusyrif"><i class="fas fa-fw fa-file-download"></i> Export Data</button> -->
               </div>
 
               <table id="example2" class="table table-bordered table-striped text-center">
@@ -90,11 +90,15 @@
             <input type="text" class="form-control" id="email" placeholder="Email" name="email" required autocomplete="off">
           </div>
           <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Masukkan Password" name="password" required>
+          </div>
+          <div class="form-group">
             <label for="no_hp">No Handphone</label>
             <input type="text" class="form-control" id="no_hp" placeholder="No Handphone" name="no_hp" required autocomplete="off">
           </div>
           <div class="form-group">
-            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small></label>
+            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <br> <small>Ukuran Max. 2MB</small></label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewTtd()" required>
               <label class="custom-file-label" for="customFile">Pilih Gambar</label>
@@ -224,7 +228,7 @@ foreach ($musyrif as $m) : ?>
             <input type="text" class="form-control" id="no_hp" placeholder="No Handphone" name="no_hp" value="<?= $m['NoHp']; ?>" required autocomplete="off">
           </div>
           <div class="form-group">
-            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <?= $m['Ttd'] ? 'Tanda Tangan sudah tersimpan' : ''; ?></label>
+            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <?= $m['Ttd'] ? 'Tanda Tangan sudah tersimpan' : ''; ?> <br> <small>Ukuran Max. 2MB</small></label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewFile()" required>
               <label class="custom-file-label" for="customFile">Pilih Gambar</label>

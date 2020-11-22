@@ -98,7 +98,7 @@
             <input type="text" class="form-control" id="nip" placeholder="NIP" name="nip" required autocomplete="off">
           </div>
           <div class="form-group">
-            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small></label>
+            <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <br> <small>Ukuran Max. 2MB</small></label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewFile()" required>
               <label class="custom-file-label" for="customFile">Pilih Gambar</label>
@@ -163,7 +163,7 @@
               <input type="text" class="form-control" id="nip" placeholder="NIP" name="nip" value="<?= $p['Nip']; ?>" required autocomplete="off">
             </div>
             <div class="form-group">
-              <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <?= $p['Ttd'] ? 'Tanda Tangan sudah tersimpan' : ''; ?></label>
+              <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <?= $p['Ttd'] ? 'Tanda Tangan sudah tersimpan' : ''; ?><br> <small>Ukuran Max. 2MB</small></label>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewFile()">
                 <label class="custom-file-label" for="customFile">Pilih Gambar</label>

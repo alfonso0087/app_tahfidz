@@ -54,9 +54,12 @@ class Auth extends CI_Controller
         } elseif ($user['level'] == "Bagian Administrasi") {
           // Arahkan ke halaman Administrasi
           redirect('Administrasi');
-        } else {
+        } elseif ($user['level'] == "Wali") {
           // Arahkan ke halaman Wali
           redirect('Wali/index');
+        } else {
+          // Arahkan ke halaman musyrif
+          redirect('Halaman_Musyrif/index');
         }
       } else {
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah!</div>');

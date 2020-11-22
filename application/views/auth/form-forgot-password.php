@@ -46,7 +46,7 @@
                   <h5>Username</h5>
                 </label>
                 <div class="input-group mb-3 col-auto">
-                  <input type="text" class="form-control" placeholder="Username" name="username" autofocus autocomplete="off">
+                  <input type="text" class="form-control" placeholder="Username/Email" name="username" autofocus autocomplete="off">
                 </div>
                 <?= form_error('username', '<small class="text-danger ml-2">', '</small>'); ?>
 

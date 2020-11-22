@@ -34,7 +34,7 @@ class Rekap_setoran_M extends CI_Model
 
   public function getRekapSetoranBy_Kelompok_Periode($IdPeriode, $IdKelompok)
   {
-    $query = 'SELECT `siswa`.`NamaLengkap`,`rekapsetoran`.`JmlSetoran`,`rekapsetoran`.`PekanRekap`,`rekapsetoran`.`Prosentase`,`rekapsetoran`.`Hasil`
+    $query = 'SELECT `siswa`.`NamaLengkap`,`rekapsetoran`.`JmlTugas`,`rekapsetoran`.`JmlSetoran`,(SELECT `rekapsetoran`.`JmlTugas`-`rekapsetoran`.`JmlSetoran`)AS "Tidak_Selesai",`rekapsetoran`.`PekanRekap`,`rekapsetoran`.`Prosentase`,`rekapsetoran`.`Hasil`
     FROM `rekapsetoran`
     JOIN `siswa` ON `siswa`.`IdSiswa`=`rekapsetoran`.`IdSiswa`
     JOIN `detailkelompok` ON `siswa`.`IdSiswa`=`detailkelompok`.`IdSiswa`

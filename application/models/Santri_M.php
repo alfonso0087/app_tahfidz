@@ -89,12 +89,12 @@ class Santri_M extends CI_Model
   public function addSantri($data)
   {
     $this->db->insert('siswa', $data);
-    return $this->db->insert_id();
   }
 
   public function addWaliSantri($dataWali)
   {
     $this->db->insert('login', $dataWali);
+    return $this->db->insert_id();
   }
 
   public function updateSantri($data)
