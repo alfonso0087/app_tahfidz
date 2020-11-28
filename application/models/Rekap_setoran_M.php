@@ -3,12 +3,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Rekap_setoran_M extends CI_Model
 {
+  // public function getAllRekapSetoran()
+  // {
+  //   $this->db->select('rs.*,s.NamaLengkap,k.NamaKelas');
+  //   $this->db->from('rekapsetoran rs');
+  //   $this->db->join('siswa s', 's.IdSiswa = rs.IdSiswa', 'left');
+  //   $this->db->join('kelas k', 'k.IdKelas = rs.IdKelas', 'left');
+  //   return $this->db->get()->result_array();
+  // }
+
   public function getAllRekapSetoran()
   {
-    $this->db->select('rs.*,s.NamaLengkap');
-    $this->db->from('rekapsetoran rs');
-    $this->db->join('siswa s', 's.IdSiswa = rs.IdSiswa', 'left');
-    return $this->db->get()->result_array();
+    $query = 'SELECT `rs`.*,`s`.`NamaLengkap`,`k`.`NamaKelas`,(SELECT COUNT(`IdKelas`) FROM `rekapsetoran` WHERE `IdKelas`=`rs`.`IdKelas`) AS jumlah_kelas
+    FROM `rekapsetoran` rs
+    JOIN `siswa` s ON rs.IdSiswa = s.IdSiswa
+    JOIN `kelas` k ON rs.IdKelas = k.IdKelas';
+    return $this->db->query($query)->result_array();
+  }
+
+  public function getRekapSetoranByNamaSantri($nama_santri)
+  {
+    $query = 'SELECT `rs`.*,`s`.`NamaLengkap`,`k`.`NamaKelas`,(SELECT COUNT(`IdKelas`) FROM `rekapsetoran` WHERE `IdKelas`=`rs`.`IdKelas`) AS jumlah_kelas
+    FROM `rekapsetoran` rs
+    JOIN `siswa` s ON rs.IdSiswa = s.IdSiswa
+    JOIN `kelas` k ON rs.IdKelas = k.IdKelas
+    WHERE `s`.`NamaLengkap` LIKE "%'  . $nama_santri .  '%"';
+    return $this->db->query($query)->result_array();
+    // $this->db->select('rs.*,s.NamaLengkap,COUNT(`IdKelas`) FROM `rekapsetoran` WHERE `IdKelas`=`rs`.`IdKelas`) AS jumlah_kelas');
+    // $this->db->from('rekapsetoran rs');
+    // $this->db->join('siswa s', 's.IdSiswa = rs.IdSiswa', 'left');
+    // $this->db->like('s.NamaLengkap', $nama_santri);
+    // return $this->db->get()->result_array();
   }
 
   public function countKeterangan($idSiswa, $pekan)
@@ -29,6 +54,12 @@ class Rekap_setoran_M extends CI_Model
   public function addRekapSetoran($data)
   {
     $this->db->insert_batch('rekapsetoran', $data);
+  }
+
+  public function deleteByKelas($data)
+  {
+    $this->db->where('IdKelas', $data['IdKelas']);
+    $this->db->delete('rekapsetoran', $data);
   }
 
 

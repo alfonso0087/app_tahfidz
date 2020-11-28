@@ -262,6 +262,23 @@ class Hasil_Ujian extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil Dihapus!');
     redirect('ujian/hasil_ujian');
   }
+
+  public function cari_data()
+  {
+    $nama_santri = $this->input->post('nama_santri');
+    $data = [
+      'title' => 'Hasil Ujian',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      // 'target_ujian' => $this->Target_ujian_M->getAllTargetUjian(),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'periode_ujian' => $this->Periode_ujian_M->getAllPeriodeUjian(),
+      'rekap_ujian' => $this->Rekap_ujian_M->getAllRekapUjian(),
+      'hasil_ujian' => $this->Hasil_ujian_M->getHasilUjianByNamaSantri($nama_santri),
+      'isi' => 'ujian/v-hasil_ujian',
+    ];
+    // check($data['hasil_ujian']);
+    $this->load->view('templates/wrapper-admin', $data);
+  }
 }
 
 /* End of file Hasil_Ujian.php */

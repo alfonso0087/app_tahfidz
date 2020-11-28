@@ -10,6 +10,13 @@ class Musyrif_M extends CI_Model
     $this->db->from('musyrif');
     return $this->db->get()->result_array();
   }
+  public function getMusyrifByNama($nama_musyrif)
+  {
+    $this->db->select('*');
+    $this->db->from('musyrif');
+    $this->db->like('NamaMusyrif', $nama_musyrif);
+    return $this->db->get()->result_array();
+  }
 
   public function getDataMusyrif($username)
   {

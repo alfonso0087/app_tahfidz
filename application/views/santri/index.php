@@ -19,8 +19,19 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSiswa"><i class="fas fa-plus"></i> Tambah Data</button>
-                <!-- <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importSiswa"><i class="fas fa-fw fa-file-upload"></i> Import Data</button>
-                <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#exportSiswa"><i class="fas fa-fw fa-file-download"></i> Export Data</button> -->
+              </div>
+
+              <!-- Form Pencarian -->
+              <div class="row" style="text-align: right;">
+                <div class="col-sm-9">
+                </div>
+                <div class="col-sm-3">
+                  <form class="form-inline" action="<?= base_url('Santri/cari_data'); ?>" method="POST">
+                    <label class="sr-only" for="inlineFormInputName2">Cari</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Masukkan Nama Santri" name="nama_santri">
+                    <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-fw fa-search"></i> Cari</button>
+                  </form>
+                </div>
               </div>
 
               <table id="example2" class="table table-bordered table-striped text-center">

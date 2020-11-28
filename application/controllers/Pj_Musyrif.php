@@ -61,6 +61,21 @@ class Pj_Musyrif extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('Pj_Musyrif');
   }
+
+  public function cari_data()
+  {
+    $nama_musyrif = $this->input->post('nama_musyrif');
+    $data = [
+      'title' => 'Data PJ Musyrif',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'pjmusyrif' => $this->Pj_musyrif_M->getMusyrifByNama($nama_musyrif),
+      'kelompok_halaqoh' => $this->Kelompok_M->getAllKelompok(),
+      'musyrif' => $this->Musyrif_M->getAllMusyrif(),
+      'isi' => 'pj-musyrif/index',
+    ];
+
+    $this->load->view('templates/wrapper-admin', $data);
+  }
 }
 
 /* End of file Pj_Musyrif.php */

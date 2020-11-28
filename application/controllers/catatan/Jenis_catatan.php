@@ -8,6 +8,7 @@ class Jenis_catatan extends CI_Controller
   {
     parent::__construct();
     //Load Dependencies
+    cek_login();
     $this->load->model('Jenis_catatan_M');
   }
 

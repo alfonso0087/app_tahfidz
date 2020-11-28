@@ -14,6 +14,19 @@ class Hasil_ujian_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getHasilUjianByNamaSantri($nama_santri)
+  {
+    $this->db->select('hu.*,s.NamaLengkap,pu.*,kls.*,p.periode');
+    $this->db->from('hasilujian hu');
+    $this->db->join('siswa s', 's.IdSiswa = hu.IdSiswa', 'left');
+    $this->db->join('periodeujian pu', 'pu.IdPeriodeUjian = hu.IdPeriodeUjian', 'left');
+    $this->db->join('periode p', 'p.IdPeriode = pu.IdPeriode', 'left');
+    $this->db->join('kelas kls', 'pu.IdKelas = kls.IdKelas', 'left');
+    $this->db->like('s.NamaLengkap', $nama_santri);
+    return $this->db->get()->result_array();
+  }
+
+
   public function getHasilUjianById($IdHasil)
   {
     $this->db->select('hu.*,s.NamaLengkap,pu.*,kls.*,p.periode');

@@ -123,6 +123,22 @@ class Rekap_Ujian extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('ujian/rekap_ujian');
   }
+
+  public function cari_data()
+  {
+    $nama_santri = $this->input->post('nama_santri');
+    $data = [
+      'title' => 'Rekap Ujian',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'target_ujian' => $this->Target_ujian_M->getAllTargetUjian(),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'periode_ujian' => $this->Periode_ujian_M->getAllPeriodeUjian(),
+      'rekap_ujian' => $this->Rekap_ujian_M->getRekapUjianByNamaSantri($nama_santri),
+      'isi' => 'ujian/v-rekap_ujian',
+    ];
+    // check($data['hasil_ujian']);
+    $this->load->view('templates/wrapper-admin', $data);
+  }
 }
 
 /* End of file Rekap_Ujian.php */

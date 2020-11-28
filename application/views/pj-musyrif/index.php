@@ -22,6 +22,19 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPJMusyrif"><i class="fas fa-plus"></i> Tambah Data</button>
               </div>
 
+              <!-- Form Pencarian -->
+              <div class="row" style="text-align: right;">
+                <div class="col-sm-9">
+                </div>
+                <div class="col-sm-3">
+                  <form class="form-inline" action="<?= base_url('Pj_Musyrif/cari_data'); ?>" method="POST">
+                    <label class="sr-only" for="inlineFormInputName2">Cari</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Masukkan Nama Musyrif" name="nama_musyrif">
+                    <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-fw fa-search"></i> Cari</button>
+                  </form>
+                </div>
+              </div>
+
               <table id="example2" class="table table-bordered table-striped text-center">
                 <thead>
                   <tr>

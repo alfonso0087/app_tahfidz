@@ -13,6 +13,16 @@ class Pj_musyrif_M extends CI_Model
     return $this->db->query($query)->result_array();
   }
 
+  public function getMusyrifByNama($nama_musyrif)
+  {
+    $this->db->select('m.NamaMusyrif,pm.*,kh.NamaKelompok');
+    $this->db->from('musyrif m');
+    $this->db->join('pjmusyrif pm', 'm.IdMusyrif = pm.IdMusyrif', 'left');
+    $this->db->join('kelompokhalaqoh kh', 'kh.IdKelompok = pm.IdKelompok', 'left');
+    $this->db->like('NamaMusyrif', $nama_musyrif);
+    return $this->db->get()->result_array();
+  }
+
   public function addPJMusyrif($data)
   {
     $this->db->insert_batch('pjmusyrif', $data);

@@ -8,6 +8,7 @@ class Catatan_santri extends CI_Controller
   {
     parent::__construct();
     //Load Dependencies
+    cek_login();
     $this->load->model('Santri_M');
     $this->load->model('Jenis_catatan_M');
     $this->load->model('Catatan_santri_M');

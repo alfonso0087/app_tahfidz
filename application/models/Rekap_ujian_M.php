@@ -19,6 +19,22 @@ class Rekap_ujian_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getRekapUjianByNamaSantri($nama_santri)
+  {
+    $this->db->select('ru.*,ru.Keterangan ket_rekap,tu.*,ju.NamaUjian,s.NamaLengkap,pu.*,p.Periode,aj.ThAjaran,smt.Semester,kls.NamaKelas');
+    $this->db->from('rekapujian ru');
+    $this->db->join('targetujian tu', 'tu.IdTargetUjian = ru.IdTargetUjian', 'left');
+    $this->db->join('jenisujian ju', 'ju.IdJenisUjian = tu.IdJenisUjian', 'left');
+    $this->db->join('siswa s', 's.IdSiswa = ru.IdSiswa', 'left');
+    $this->db->join('periodeujian pu', 'pu.IdPeriodeUjian = ru.IdPeriodeUjian', 'left');
+    $this->db->join('periode p', 'p.IdPeriode = pu.IdPeriode', 'left');
+    $this->db->join('ajaran aj', 'aj.IdAjaran = pu.IdAjaran', 'left');
+    $this->db->join('semester smt', 'smt.IdSemester = pu.IdSemester', 'left');
+    $this->db->join('kelas kls', 'kls.IdKelas = pu.IdKelas', 'left');
+    $this->db->like('s.NamaLengkap', $nama_santri);
+    return $this->db->get()->result_array();
+  }
+
   public function getRekapUjian($id)
   {
     $this->db->select('ru.*,ru.Keterangan ket_rekap,tu.*,ju.NamaUjian,s.NamaLengkap,pu.*,p.Periode,aj.ThAjaran,smt.Semester,kls.NamaKelas');

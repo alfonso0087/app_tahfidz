@@ -8,6 +8,7 @@ class Rekap_setoran extends CI_Controller
   {
     parent::__construct();
     //Load Dependencies
+    cek_login();
     $this->load->model('Rekap_setoran_M');
     $this->load->model('Santri_M');
     $this->load->model('Kelas_M');
@@ -23,7 +24,7 @@ class Rekap_setoran extends CI_Controller
       'santri' => $this->Santri_M->getAllSantri(),
       'isi'     => 'halaqoh/v-rekap_setoran',
     ];
-    // var_dump($data['detail_kelompok']);
+    // var_dump($data['rekap_setoran']);
     // die;
 
     $this->load->view('templates/wrapper-admin', $data);
@@ -79,6 +80,7 @@ class Rekap_setoran extends CI_Controller
       'isi'     => 'halaqoh/v-add_rekap_setoran',
       'IdSiswa' => $idSiswa,
       'JmlTugas' => $this->input->post('jml_tugas'),
+      'id_kelas' => $kelas,
       'data_setoran' => $jml_setoran,
       'PekanRekap' => $pekan,
     ];
@@ -90,6 +92,7 @@ class Rekap_setoran extends CI_Controller
   public function add()
   {
     $idSiswa = $this->input->post('IdSiswa');
+    $IdKelas = $this->input->post('IdKelas');
     $JmlTugas = $this->input->post('JmlTugas');
     $JmlSetoran = $this->input->post('JmlSetoran');
     $PekanRekap = $this->input->post('PekanRekap');
@@ -114,6 +117,7 @@ class Rekap_setoran extends CI_Controller
           foreach ($JmlSetoran as $setoran => $js) {
             foreach ($idSiswa as $siswa => $s) {
               $data[$siswa]['IdSiswa'] = $s;
+              $data[$siswa]['IdKelas'] = $IdKelas;
               $data[$siswa]['JmlTugas'] = $JmlTugas;
               $data[$setoran]['JmlSetoran'] = $js;
               $data[$siswa]['PekanRekap'] = $PekanRekap;
@@ -137,8 +141,30 @@ class Rekap_setoran extends CI_Controller
   }
 
   //Delete one item
-  public function delete($id = NULL)
+  public function delete($IdKelas)
   {
+    $data = [
+      'IdKelas' => $IdKelas
+    ];
+    $this->Rekap_setoran_M->deleteByKelas($data);
+    $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
+    redirect('halaqoh/Rekap_setoran');
+  }
+
+  public function cari_data()
+  {
+    $nama_santri = $this->input->post('nama_santri');
+    $data = [
+      'title'   => 'Rekap Setoran',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'rekap_setoran' => $this->Rekap_setoran_M->getRekapSetoranByNamaSantri($nama_santri),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'isi'     => 'halaqoh/v-rekap_setoran',
+    ];
+    // var_dump($data['detail_kelompok']);
+    // die;
+
+    $this->load->view('templates/wrapper-admin', $data);
   }
 }
 

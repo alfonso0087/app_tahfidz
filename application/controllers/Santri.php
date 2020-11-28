@@ -120,6 +120,21 @@ class Santri extends CI_Controller
       echo "Errors : " . $this->upload->display_errors();
     }
   }
+
+  // Cari data santri
+  public function cari_data()
+  {
+    $nama_santri = $this->input->post('nama_santri');
+    $data = [
+      'title' => 'Data Santri',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'santri' => $this->Santri_M->getSantriByNama($nama_santri),
+      'kelas' => $this->Kelas_M->getAllKelas(),
+      'isi' => 'santri/index',
+    ];
+
+    $this->load->view('templates/wrapper-admin', $data);
+  }
 }
 
 /* End of file Santri.php */

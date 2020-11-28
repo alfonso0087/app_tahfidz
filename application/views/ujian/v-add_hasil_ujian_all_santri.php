@@ -79,8 +79,12 @@
                         $reward = '';
                         if ($ds['Nilai'] >= 80 && $ds['Prosentase'] == 100) {
                           $reward = 'PULANG';
-                        } else {
+                        } elseif ($ds['Nilai'] < 80 && $ds['Prosentase'] == 100) {
                           $reward = 'RIHLAH';
+                        } elseif ($ds['Nilai'] < 80 && $ds['Prosentase'] <= 100) {
+                          $reward = 'Tidak Dapat Reward';
+                        } else {
+                          $reward = 'Tidak Dapat Reward';
                         }
                         ?>
                         <td><?= $reward; ?></td>

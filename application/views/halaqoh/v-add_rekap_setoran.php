@@ -132,6 +132,7 @@
                         <td><?= prosentase($d_setoran['jumlah_setoran'], $JmlTugas) == 100 ? 'Reward' : 'Tidak Dapat Reward'; ?></td>
                         <input type="hidden" name="IdSiswa[]" value="<?= $d_setoran['IdSiswa']; ?>">
                         <input type="hidden" name="JmlTugas" value="<?= $JmlTugas; ?>">
+                        <input type="hidden" name="IdKelas" value="<?= $id_kelas; ?>">
                         <input type="hidden" name="JmlSetoran[]" value="<?= $d_setoran['jumlah_setoran']; ?>">
                         <input type="hidden" name="PekanRekap" value="<?= $PekanRekap; ?>">
                         <input type="hidden" name="Hasil[]" value="<?= prosentase($d_setoran['jumlah_setoran'], $JmlTugas) == 100 ? 'Selesai' : 'Tidak Selesai'; ?>">

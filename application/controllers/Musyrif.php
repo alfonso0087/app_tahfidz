@@ -166,17 +166,17 @@ class Musyrif extends CI_Controller
     }
   }
 
-  public function export()
-  {
-    $tipeFile = $this->input->post('tipeFile');
-    if ($tipeFile == "pdf") {
-      $this->export_pdf();
-    } elseif ($tipeFile == 'xls') {
-      $this->export_xls();
-    } else {
-      $this->export_xlsx();
-    }
-  }
+  // public function export()
+  // {
+  //   $tipeFile = $this->input->post('tipeFile');
+  //   if ($tipeFile == "pdf") {
+  //     $this->export_pdf();
+  //   } elseif ($tipeFile == 'xls') {
+  //     $this->export_xls();
+  //   } else {
+  //     $this->export_xlsx();
+  //   }
+  // }
 
   public function export_pdf()
   {
@@ -188,14 +188,17 @@ class Musyrif extends CI_Controller
     $mpdf->Output($namafile, "D");
   }
 
-  public function export_xls()
+  public function cari_data()
   {
-    echo "Export XLS";
-  }
+    $nama_musyrif = $this->input->post('nama_musyrif');
+    $data = [
+      'title' => 'Data Musyrif',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'musyrif' => $this->Musyrif_M->getMusyrifByNama($nama_musyrif),
+      'isi' => 'musyrif/index',
+    ];
 
-  public function export_xlsx()
-  {
-    echo "Export XLSX";
+    $this->load->view('templates/wrapper-admin', $data);
   }
 }
 

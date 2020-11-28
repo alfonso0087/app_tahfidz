@@ -24,6 +24,17 @@
                 <a href="<?= base_url('ujian/hasil_ujian/perankingan'); ?>" class="btn btn-primary btn-sm ml-2"><i class="fas fa-sort-numeric-down"></i> Perankingan</a>
               </div>
 
+              <div class="row" style="text-align: right;">
+                <div class="col-sm-9">
+                </div>
+                <div class="col-sm-3">
+                  <form class="form-inline" action="<?= base_url('ujian/Hasil_Ujian/cari_data'); ?>" method="POST">
+                    <label class="sr-only" for="inlineFormInputName2">Cari</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Masukkan Nama Santri" name="nama_santri">
+                    <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-fw fa-search"></i> Cari</button>
+                  </form>
+                </div>
+              </div>
               <table id="example2" class="table  table-striped text-center">
                 <thead>
                   <tr>

@@ -76,6 +76,23 @@ class Setoran extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('halaqoh/setoran');
   }
+
+  public function cari_data()
+  {
+    $nama_kelompok = $this->input->post('nama_kelompok');
+    $data = [
+      'title'   => 'Setoran',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'setoran' => $this->Setoran_M->getSetoranByKelompok($nama_kelompok),
+      'detail_target' => $this->Detail_target_M->getAllDetailTarget(),
+      'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
+      'jadwal' => $this->Jadwal_M->getAllJadwal(),
+      'kelompok' => $this->Kelompok_M->getAllKelompok(),
+      'isi'     => 'halaqoh/v-setoran',
+    ];
+
+    $this->load->view('templates/wrapper-admin', $data);
+  }
 }
 
 /* End of file Setoran.php */

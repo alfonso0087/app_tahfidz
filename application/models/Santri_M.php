@@ -14,6 +14,16 @@ class Santri_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getSantriByNama($nama_santri)
+  {
+    $this->db->select('*');
+    $this->db->from('siswa');
+    $this->db->join('kelas', 'kelas.IdKelas = siswa.IdKelas');
+    $this->db->order_by('siswa.IdKelas', 'asc');
+    $this->db->like('NamaLengkap', $nama_santri);
+    return $this->db->get()->result_array();
+  }
+
   public function getSantriKelas($kelas)
   {
     // check($kelas);

@@ -16,6 +16,19 @@ class Setoran_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getSetoranByKelompok($nama_kelompok)
+  {
+    $this->db->select('setor.*,dt.IsiTarget,jadwal.Waktu,jadwal.Ket,dk.IdKelompok,kh.NamaKelompok,s.NamaLengkap');
+    $this->db->from('setorantarget setor');
+    $this->db->join('detailtarget dt', 'dt.IdDetailTarget = setor.IdDetailTarget', 'left');
+    $this->db->join('jadwalhalaqoh jadwal', 'jadwal.IdJadwal = setor.IdJadwal', 'left');
+    $this->db->join('detailkelompok dk', 'dk.IdDetailKelompok = setor.IdDetailKelompok', 'left');
+    $this->db->join('kelompokhalaqoh kh', 'kh.IdKelompok = dk.IdKelompok', 'left');
+    $this->db->join('siswa s', 's.IdSiswa = dk.IdSiswa', 'left');
+    $this->db->like('kh.NamaKelompok', $nama_kelompok);
+    return $this->db->get()->result_array();
+  }
+
   public function addSetoran($data)
   {
     $this->db->insert('setorantarget', $data);
