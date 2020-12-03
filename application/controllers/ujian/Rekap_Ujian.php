@@ -11,7 +11,9 @@ class Rekap_Ujian extends CI_Controller
     cek_login();
     // $this->load->model('Jenis_ujian_M');
     $this->load->model('Target_ujian_M');
+    $this->load->model('Target_ujian_kelas_M');
     $this->load->model('Santri_M');
+    $this->load->model('Kelas_M');
     $this->load->model('Periode_ujian_M');
     $this->load->model('Rekap_ujian_M');
   }
@@ -37,6 +39,7 @@ class Rekap_Ujian extends CI_Controller
     $data = [
       'title' => 'Tambah Data Rekap Ujian',
       'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'kelas' => $this->Kelas_M->getAllKelas(),
       'target_ujian' => $this->Target_ujian_M->getAllTargetUjian(),
       'santri' => $this->Santri_M->getAllSantri(),
       'periode_ujian' => $this->Periode_ujian_M->getAllPeriodeUjian(),
@@ -47,6 +50,30 @@ class Rekap_Ujian extends CI_Controller
     $this->load->view('templates/wrapper-admin', $data);
   }
 
+  public function getTargetByKelas()
+  {
+    $id_kelas = $this->input->post('id_kelas');
+
+    $targetujian = $this->Target_ujian_kelas_M->getTargetUjianByKelas($id_kelas);
+
+    echo "<option value=" . "" . ">" . "-- Pilih Target Ujian --" . "</option>";
+    foreach ($targetujian as $tu) {
+      echo "<option value='" . $tu['IdTargetUjian'] . "'id_targetujian='" . $tu['IdTargetUjian'] . "' >" . $tu['Keterangan'] . "</option>";
+    }
+  }
+
+
+  public function getSantriByKelas()
+  {
+    $id_kelas = $this->input->post('id_kelas');
+
+    $listsantri = $this->Santri_M->getSantriKelas($id_kelas);
+
+    echo "<option value=" . "" . ">" . "-- Pilih Santri --" . "</option>";
+    foreach ($listsantri as $santri) {
+      echo "<option value='" . $santri['IdSiswa'] . "'id_santri='" . $santri['IdSiswa'] . "' >" . $santri['NamaLengkap'] . "</option>";
+    }
+  }
 
   public function predikat_ket()
   {

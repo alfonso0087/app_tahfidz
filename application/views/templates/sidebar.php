@@ -246,6 +246,13 @@
                   <p style="color: white;">Target Ujian</p>
                 </a>
               </li>
+              <!-- Target Ujian Tiap Kelas -->
+              <li class="nav-item">
+                <a href="<?= base_url('ujian/Target_Ujian_Kelas'); ?>" class="nav-link <?= $subUrl == "Target_Ujian_Kelas" ? 'active bg-primary' : ''; ?>">
+                  <i class="fas fa-fw fa-sort-alpha-down nav-icon"></i>
+                  <p style="color: white;">Target Ujian Perkelas</p>
+                </a>
+              </li>
               <!-- Rekap Ujian -->
               <li class="nav-item">
                 <a href="<?= base_url('ujian/rekap_ujian'); ?>" class="nav-link <?= $subUrl == "rekap_ujian" ? 'active bg-primary' : ''; ?>">

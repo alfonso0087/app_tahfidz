@@ -28,6 +28,8 @@
        <!-- <script src="<?= base_url('vendors/'); ?>plugins/jquery/jquery.min.js"></script> -->
        <!-- Bootstrap 4 -->
        <script src="<?= base_url('vendors/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+       <!-- overlayScrollbars -->
+       <script src="<?= base_url('vendors/'); ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
        <!-- SweetAlert2 -->
        <script src="<?= base_url('vendors/'); ?>plugins/sweetalert2/sweetalert2.min.js"></script>
        <!-- Script pesan Sweetalert -->

@@ -36,9 +36,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?= base_url('vendors/'); ?>dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?= base_url('vendors/'); ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- jQuery -->
   <script src="<?= base_url('vendors/'); ?>plugins/jquery/jquery.min.js"></script>
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
