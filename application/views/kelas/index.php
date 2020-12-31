@@ -19,7 +19,6 @@
             <div class="card-body">
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addKelas"><i class="fas fa-plus"></i> Tambah Data</button>
-
               </div>
 
               <table id="example2" class="table table-bordered table-striped text-center">

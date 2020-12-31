@@ -51,7 +51,7 @@
                       <td><?= $tgt['Pekan']; ?></td>
                       <td>
                         <button class="btn btn-success" data-toggle="modal" data-target="#editTarget<?= $tgt['IdTarget']; ?>">Ubah</button>
-                        <a href="<?= base_url('tahfidz/target/delete/' . $tgt['IdTarget']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Target Tahfidz" namaData=<?= $tgt['Pekan']; ?>>Haps</i></a>
+                        <a href="<?= base_url('tahfidz/target/delete/' . $tgt['IdTarget']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Target Tahfidz" namaData=<?= $tgt['Pekan']; ?>>Hapus</i></a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

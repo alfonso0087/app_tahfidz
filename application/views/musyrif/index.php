@@ -17,6 +17,14 @@
             <div class="flash-data" data-flashdata="<?= $this->session->flashdata('pesan'); ?>" data-title="Data Musyrif">
             </div>
             <div class="card-body">
+              <?php if (validation_errors()) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <b><?= validation_errors(); ?></b>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <?php endif; ?>
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMusyrif"><i class="fas fa-plus"></i> Tambah Data</button>
@@ -91,7 +99,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?= base_url('musyrif/add'); ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url('musyrif'); ?>" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="nama_musyrif">Nama Lengkap</label>
             <input type="text" class="form-control" id="nama_musyrif" placeholder="Nama Lengkap" name="nama_musyrif" required autocomplete="off">
@@ -241,7 +249,7 @@ foreach ($musyrif as $m) : ?>
           <div class="form-group">
             <label for="nip">Tanda Tangan <small>(Format : .jpg/png)</small> <?= $m['Ttd'] ? 'Tanda Tangan sudah tersimpan' : ''; ?> <br> <small>Ukuran Max. 2MB</small></label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewFile()" required>
+              <input type="file" class="custom-file-input" id="ttd" name="ttd" accept=".png,.jpg" onchange="previewFile()" <?= $m['Ttd'] ? '' : 'required'; ?>>
               <label class="custom-file-label" for="customFile">Pilih Gambar</label>
             </div>
           </div>

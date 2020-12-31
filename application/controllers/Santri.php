@@ -22,15 +22,38 @@ class Santri extends CI_Controller
   // List all your items
   public function index()
   {
-    $data = [
-      'title' => 'Data Santri',
-      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
-      'santri' => $this->Santri_M->getAllSantri(),
-      'kelas' => $this->Kelas_M->getAllKelas(),
-      'isi' => 'santri/index',
-    ];
+    $this->form_validation->set_rules('nis', 'NIS', 'trim|required|is_unique[siswa.NIS]', [
+      'required' => 'Form %s wajib diisi !',
+      'is_unique' => '%s telah terdaftar dalam sistem'
+    ]);
+    $this->form_validation->set_rules('nama', 'Nama Santri', 'trim|required', [
+      'required' => 'Form %s wajib diisi !'
+    ]);
+    $this->form_validation->set_rules('email', 'Email Wali', 'trim|required|valid_email', [
+      'required' => 'Form %s wajib diisi !',
+      'valid_email' => 'Mohon gunakan email yang valid'
+    ]);
+    $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]', [
+      'required' => 'Form %s wajib diisi !',
+      'min_length' => 'Panjang %s minimal 4 karakter'
+    ]);
 
-    $this->load->view('templates/wrapper-admin', $data);
+
+    if ($this->form_validation->run() == FALSE) {
+      // Jika validasi gagal/error
+      $data = [
+        'title' => 'Data Santri',
+        'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+        'santri' => $this->Santri_M->getAllSantri(),
+        'kelas' => $this->Kelas_M->getAllKelas(),
+        'isi' => 'santri/index',
+      ];
+
+      $this->load->view('templates/wrapper-admin', $data);
+    } else {
+      // Jika validasi sukkses
+      $this->add();
+    }
   }
 
   // Add a new item

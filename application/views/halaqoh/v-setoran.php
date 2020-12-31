@@ -91,17 +91,28 @@
       </div>
       <div class="modal-body">
         <?= form_open('halaqoh/setoran/add'); ?>
+        <!-- Pilih Kelas -->
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for="kelas">Kelas</label>
+          </div>
+          <div class="col-sm-8">
+            <select name="kelas" class="form-control">
+              <option> -- Pilih Kelas -- </option>
+              <?php foreach ($kelas as $kls) : ?>
+                <option value="<?= $kls['IdKelas']; ?>" idkelas="<?= $kls['IdKelas']; ?>"><?= $kls['NamaKelas']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
         <!-- Isi Target -->
         <div class="form-group row">
           <div class="col-sm-4">
             <label for="isi">Isi Target</label>
           </div>
           <div class="col-sm-8">
-            <select name="isi" class="form-control">
+            <select name="isi" class="form-control" id="isi_target">
               <option> -- Pilih Isi Target -- </option>
-              <?php foreach ($detail_target as $dt) : ?>
-                <option value="<?= $dt['IdDetailTarget']; ?>"><?= $dt['NamaKelas']; ?> | <?= $dt['IsiTarget']; ?> | <?= $dt['Keterangan']; ?></option>
-              <?php endforeach; ?>
             </select>
           </div>
         </div>
@@ -127,21 +138,42 @@
           <div class="col-sm-8">
             <select name="kelompok" class="form-control">
               <option> -- Pilih Kelompok -- </option>
-              <?php foreach ($detail_kelompok as $k) : ?>
-                <option value="<?= $k['IdDetailKelompok']; ?>"><?= $k['NamaKelompok']; ?> | <?= $k['NamaKelas']; ?> - <?= $k['NamaLengkap']; ?> </option>
+              <?php foreach ($kelompok as $k) : ?>
+                <option value="<?= $k['IdKelompok']; ?>" IdKelompok="<?= $k['IdKelompok']; ?>"><?= $k['NamaKelompok']; ?> </option>
               <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <!-- Santri/Detail Kelompok -->
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label for="detailKelompok">Santri</label>
+          </div>
+          <div class="col-sm-8">
+            <select name="kelompok" class="form-control" id="detail_kelompok">
+              <option> -- Pilih Santri -- </option>
             </select>
           </div>
         </div>
         <!-- Presensi -->
         <div class="form-group">
           <label for="presensi">Presensi</label>
-          <input type="text" class="form-control" id="presensi" placeholder="Presensi" name="presensi" required autocomplete="off">
+          <!-- <input type="text" class="form-control" id="presensi" placeholder="Presensi" name="presensi" required autocomplete="off"> -->
+          <select name="presensi" class="form-control">
+            <option> -- Pilih Presensi -- </option>
+            <option value="Masuk">Masuk</option>
+            <option value="Tidak Masuk">Tidak Masuk</option>
+          </select>
         </div>
         <!-- Keterangan -->
         <div class="form-group">
           <label for="keterangan">Keterangan</label>
-          <input type="text" class="form-control" id="keterangan" placeholder="Keterangan" name="keterangan" required autocomplete="off">
+          <!-- <input type="text" class="form-control" id="keterangan" placeholder="Keterangan" name="keterangan" required autocomplete="off"> -->
+          <select name="keterangan" class="form-control">
+            <option> -- Pilih Keterangan -- </option>
+            <option value="Selesai">Selesai</option>
+            <option value="Tidak Selesai">Tidak Selesai</option>
+          </select>
         </div>
 
       </div>
@@ -176,7 +208,7 @@
               <label for="isi">Isi Target</label>
             </div>
             <div class="col-sm-8">
-              <select name="isi" class="form-control">
+              <select name="isi" class="form-control" disabled="disabled">
                 <?php if ($str['IdDetailTarget']) : ?>
                   <option value="<?= $str['IdDetailTarget']; ?>" selected><?= $str['IsiTarget']; ?> | <?= $str['Keterangan']; ?></option>
                   <option> -- Pilih Isi Target -- </option>
@@ -198,7 +230,7 @@
               <label for="jadwalHalaqoh">Jadwal Halaqoh</label>
             </div>
             <div class="col-sm-8">
-              <select name="jadwalHalaqoh" class="form-control">
+              <select name="jadwalHalaqoh" class="form-control" disabled="disabled">
                 <?php if ($str['IdJadwal']) : ?>
                   <option value="<?= $str['IdJadwal']; ?>" selected><?= $str['Waktu']; ?> | <?= $str['Ket']; ?></option>
                   <option> -- Pilih Jadwal -- </option>
@@ -220,7 +252,7 @@
               <label for="Kelompok">Kelompok</label>
             </div>
             <div class="col-sm-8">
-              <select name="kelompok" class="form-control">
+              <select name="kelompok" class="form-control" disabled="disabled">
                 <?php if ($str['IdDetailKelompok']) : ?>
                   <option value="<?= $str['IdDetailKelompok']; ?>" selected><?= $str['NamaKelompok']; ?> | <?= $str['NamaLengkap']; ?></option>
                   <option> -- Pilih Kelompok -- </option>
@@ -239,12 +271,36 @@
           <!-- Presensi -->
           <div class="form-group">
             <label for="presensi">Presensi</label>
-            <input type="text" class="form-control" id="presensi" placeholder="Presensi" name="presensi" value="<?= $str['Presensi']; ?>" required autocomplete="off">
+            <select name="presensi" class="form-control">
+              <?php if ($str['Presensi']) : ?>
+                <option value="<?= $str['Presensi']; ?>" selected><?= $str['Presensi']; ?></option>
+                <option> -- Pilih Presensi -- </option>
+                <option value="Masuk">Masuk</option>
+                <option value="Tidak Masuk">Tidak Masuk</option>
+              <?php else : ?>
+                <option> -- Pilih Presensi -- </option>
+                <option value="Masuk">Masuk</option>
+                <option value="Tidak Masuk">Tidak Masuk</option>
+              <?php endif; ?>
+            </select>
+            <!-- <input type="text" class="form-control" id="presensi" placeholder="Presensi" name="presensi" value="<?= $str['Presensi']; ?>" required autocomplete="off"> -->
           </div>
           <!-- Keterangan -->
           <div class="form-group">
             <label for="keterangan">Keterangan</label>
-            <input type="text" class="form-control" id="keterangan" placeholder="Keterangan" name="keterangan" value="<?= $str['Keterangan']; ?>" required autocomplete="off">
+            <select name="keterangan" class="form-control">
+              <?php if ($str['Keterangan']) : ?>
+                <option value="<?= $str['Keterangan']; ?>" selected><?= $str['Keterangan']; ?></option>
+                <option> -- Pilih Keterangan -- </option>
+                <option value="Selesai">Selesai</option>
+                <option value="Tidak Selesai">Tidak Selesai</option>
+              <?php else : ?>
+                <option> -- Pilih Keterangan -- </option>
+                <option value="Selesai">Selesai</option>
+                <option value="Tidak Selesai">Tidak Selesai</option>
+              <?php endif; ?>
+            </select>
+            <!-- <input type="text" class="form-control" id="keterangan" placeholder="Keterangan" name="keterangan" value="<?= $str['Keterangan']; ?>" required autocomplete="off"> -->
           </div>
 
         </div>
@@ -260,3 +316,39 @@
   </div>
 <?php endforeach; ?>
 <!-- /.modal -->
+
+<script type="text/javascript">
+  // cek_nilai();
+
+  $(document).ready(function() {
+    $("select[name=kelas]").on("change", function() {
+      var idKelas = $("option:selected", this).attr("idkelas");
+      var idKelompok = $("option:selected", this).attr("IdKelompok");
+      // alert(idKelompok);
+      $.ajax({
+        type: "POST",
+        url: "<?= base_url('halaqoh/Setoran/getDetailTargetByKelas') ?>",
+        data: 'id_kelas=' + idKelas,
+        success: function(detailTarget) {
+          // alert(detailTarget);
+          $("select[id=isi_target]").html(detailTarget);
+        }
+      });
+    });
+  });
+  $(document).ready(function() {
+    $("select[name=kelompok]").on("change", function() {
+      var idKelompok = $("option:selected", this).attr("IdKelompok");
+      // alert(idKelompok);
+      $.ajax({
+        type: "POST",
+        url: "<?= base_url('halaqoh/Setoran/getSantriByKelompok') ?>",
+        data: 'id_kelompok=' + idKelompok,
+        success: function(detailKelompok) {
+          // alert(detailTarget);
+          $("select[id=detail_kelompok]").html(detailKelompok);
+        }
+      });
+    });
+  });
+</script>

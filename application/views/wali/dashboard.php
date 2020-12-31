@@ -17,8 +17,7 @@
               <form action="<?= base_url('Wali'); ?>">
                 <input type="hidden" name="IdSiswa" value="<?= $user['IdSiswa']; ?>">
                 <div class="row sm-12">
-
-                  <div class="col-sm-2">
+                  <div class="col-sm-8">
                     <div class="form-group" style="width: auto;">
                       <select name="periode" id="periode" class="form-control">
                         <option>Pilih Periode</option>
@@ -28,7 +27,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-sm-8">
+                  <div class="col-sm-2">
                     <button class="btn btn-primary" type="submit">Tampil</button>
                   </div>
                 </div>

@@ -13,6 +13,7 @@ class Target_M extends CI_Model
     $this->db->join('periode p', 'p.IdPeriode = t.IdPeriode', 'left');
     $this->db->join('ajaran a', 'a.IdAjaran = t.IdAjaran', 'left');
     $this->db->join('semester smt', 'smt.IdSemester = t.IdSemester', 'left');
+    $this->db->order_by('kls.IdKelas', 'asc');
     return $this->db->get()->result_array();
   }
 

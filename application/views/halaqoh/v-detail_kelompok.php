@@ -15,6 +15,14 @@
             <div class="flash-data" data-flashdata="<?= $this->session->flashdata('pesan'); ?>" data-title="Data Detail Kelompok">
             </div>
             <div class="card-body">
+              <?php if (validation_errors()) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <b><?= validation_errors(); ?></b>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <?php endif; ?>
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDetailKelompok"><i class="fas fa-plus"></i> Tambah Data</button>
@@ -72,7 +80,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <?= form_open('halaqoh/detail_kelompok/add'); ?>
+        <?= form_open('halaqoh/detail_kelompok'); ?>
         <!-- Kelompok -->
         <div class="form-group row">
           <div class="col-sm-4">

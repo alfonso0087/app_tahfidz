@@ -18,17 +18,30 @@ class Detail_kelompok extends CI_Controller
   // List all your items
   public function index($offset = 0)
   {
-    $data = [
-      'title'           => 'Detail Kelompok',
-      'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
-      'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
-      'siswa'           => $this->Santri_M->getAllSantri(),
-      'kelompok'        => $this->Kelompok_M->getAllKelompok(),
-      'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
-      'isi'             => 'halaqoh/v-detail_kelompok',
-    ];
+    $this->form_validation->set_rules('siswa', 'Data Siswa', 'trim|required|is_unique[detailkelompok.IdSiswa]', [
+      'required' => '%s wajib diisi !',
+      'is_unique' => '%s sudah ada dalam sistem'
+    ]);
+    $this->form_validation->set_rules('musyrif', 'Data Musyrif', 'trim|required', [
+      'required' => '%s wajib diisi !'
+    ]);
 
-    $this->load->view('templates/wrapper-admin', $data);
+    if ($this->form_validation->run() == FALSE) {
+      // Jika validasi gagal
+      $data = [
+        'title'           => 'Detail Kelompok',
+        'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+        'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
+        'siswa'           => $this->Santri_M->getAllSantri(),
+        'kelompok'        => $this->Kelompok_M->getAllKelompok(),
+        'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
+        'isi'             => 'halaqoh/v-detail_kelompok',
+      ];
+
+      $this->load->view('templates/wrapper-admin', $data);
+    } else {
+      $this->add();
+    }
   }
 
   // Add a new item

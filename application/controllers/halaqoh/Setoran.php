@@ -11,6 +11,7 @@ class Setoran extends CI_Controller
     cek_login();
     $this->load->model('Setoran_M');
     $this->load->model('Detail_kelompok_M');
+    $this->load->model('Kelas_M');
     $this->load->model('Jadwal_M');
     $this->load->model('Kelompok_M');
     $this->load->model('Detail_target_M');
@@ -25,6 +26,7 @@ class Setoran extends CI_Controller
       'setoran' => $this->Setoran_M->getAllSetoran(),
       'detail_target' => $this->Detail_target_M->getAllDetailTarget(),
       'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
+      'kelas' => $this->Kelas_M->getAllKelas(),
       'jadwal' => $this->Jadwal_M->getAllJadwal(),
       'kelompok' => $this->Kelompok_M->getAllKelompok(),
       'isi'     => 'halaqoh/v-setoran',
@@ -33,6 +35,29 @@ class Setoran extends CI_Controller
     // die;
 
     $this->load->view('templates/wrapper-admin', $data);
+  }
+
+  public function getDetailTargetByKelas()
+  {
+    $id_kelas = $this->input->post('id_kelas');
+    $detailTarget = $this->Detail_target_M->getDetailTargetByKelas($id_kelas);
+    // check($detailTarget);
+    echo "<option value=" . "" . ">" . "-- Pilih Isi Target --" . "</option>";
+    foreach ($detailTarget as $dt) {
+      echo "<option value='" . $dt['IdDetailTarget'] . "'id_detailtarget='" . $dt['IdDetailTarget'] . "' >" . $dt['IsiTarget'] . "</option>";
+    }
+  }
+
+  public function getSantriByKelompok()
+  {
+    $idKelompok = $this->input->post('id_kelompok');
+
+    $detailKelompok = $this->Detail_kelompok_M->getdetailByKelompok($idKelompok);
+
+    echo "<option value=" . "" . ">" . "-- Pilih Santri --" . "</option>";
+    foreach ($detailKelompok as $dk) {
+      echo "<option value='" . $dk['IdDetailKelompok'] . "'id_detailkelompok='" . $dk['IdDetailKelompok'] . "' >" . $dk['NamaLengkap'] . "</option>";
+    }
   }
 
   // Add a new item
@@ -45,6 +70,7 @@ class Setoran extends CI_Controller
       'Presensi' => $this->input->post('presensi'),
       'Keterangan' => $this->input->post('keterangan')
     ];
+    check($data);
     $this->Setoran_M->addSetoran($data);
     $this->session->set_flashdata('pesan', 'Berhasil ditambahkan!');
     redirect('halaqoh/setoran');
@@ -55,9 +81,9 @@ class Setoran extends CI_Controller
   {
     $data = [
       'IdSetoran' => $id,
-      'IdDetailTarget' => $this->input->post('isi'),
-      'IdJadwal' => $this->input->post('jadwalHalaqoh'),
-      'IdDetailKelompok' => $this->input->post('kelompok'),
+      // 'IdDetailTarget' => $this->input->post('isi'),
+      // 'IdJadwal' => $this->input->post('jadwalHalaqoh'),
+      // 'IdDetailKelompok' => $this->input->post('kelompok'),
       'Presensi' => $this->input->post('presensi'),
       'Keterangan' => $this->input->post('keterangan')
     ];

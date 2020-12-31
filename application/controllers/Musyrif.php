@@ -20,14 +20,38 @@ class Musyrif extends CI_Controller
   // List all your items
   public function index()
   {
-    $data = [
-      'title' => 'Data Musyrif',
-      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
-      'musyrif' => $this->Musyrif_M->getAllMusyrif(),
-      'isi' => 'musyrif/index',
-    ];
+    $this->form_validation->set_rules('nama_musyrif', 'Nama Musyrif', 'trim|required', [
+      'required' => 'Form %s wajib diisi !'
+    ]);
+    $this->form_validation->set_rules('email', 'Email Musyrif', 'trim|required|valid_email|is_unique[musyrif.Email]', [
+      'required' => 'Form %s wajib diisi !',
+      'valid_email' => 'Mohon gunakan email yang valid',
+      'is_unique' => '%s telah terdaftar dalam sistem'
+    ]);
+    $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]', [
+      'required' => 'Form %s wajib diisi !',
+      'min_length' => 'Panjang %s minimal 4 karakter'
+    ]);
+    $this->form_validation->set_rules('no_hp', 'No Handphone', 'trim|required|is_unique[musyrif.NoHp]', [
+      'required' => 'Form %s wajib diisi !',
+      'is_unique' => '%s telah terdaftar dalam sistem'
+    ]);
 
-    $this->load->view('templates/wrapper-admin', $data);
+
+    if ($this->form_validation->run() == FALSE) {
+      // Jika validasi gagal
+      $data = [
+        'title' => 'Data Musyrif',
+        'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+        'musyrif' => $this->Musyrif_M->getAllMusyrif(),
+        'isi' => 'musyrif/index',
+      ];
+
+      $this->load->view('templates/wrapper-admin', $data);
+    } else {
+      // Jika validasi sukses
+      $this->add();
+    }
   }
 
   // Add a new item
@@ -64,7 +88,7 @@ class Musyrif extends CI_Controller
           'Ttd' => $file_ttd
         ];
         $this->Musyrif_M->addMusyrif($data);
-        $this->session->set_flashdata('pesan', 'Berhasil diubah!');
+        $this->session->set_flashdata('pesan', 'Berhasil ditambah!');
         redirect('musyrif');
       } else {
         echo $this->upload->display_errors();

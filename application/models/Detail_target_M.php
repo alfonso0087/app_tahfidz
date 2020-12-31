@@ -13,6 +13,17 @@ class Detail_target_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  public function getDetailTargetByKelas($id_kelas)
+  {
+    $this->db->select('*');
+    $this->db->from('detailtarget det');
+    $this->db->join('target tgt', 'det.IdTarget = tgt.IdTarget', 'left');
+    $this->db->join('kelas kls', 'kls.IdKelas = tgt.IdKelas', 'left');
+    $this->db->where('kls.IdKelas', $id_kelas);
+    $this->db->order_by('det.IdTarget', 'asc');
+    return $this->db->get()->result_array();
+  }
+
   public function addDetailTarget($data)
   {
     $this->db->insert('detailtarget', $data);
