@@ -13,6 +13,7 @@ class Detail_kelompok extends CI_Controller
     $this->load->model('Santri_M');
     $this->load->model('Kelompok_M');
     $this->load->model('Musyrif_M');
+    $this->load->model('Kelas_M');
   }
 
   // List all your items
@@ -28,17 +29,36 @@ class Detail_kelompok extends CI_Controller
 
     if ($this->form_validation->run() == FALSE) {
       // Jika validasi gagal
-      $data = [
-        'title'           => 'Detail Kelompok',
-        'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
-        'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
-        'siswa'           => $this->Santri_M->getAllSantri(),
-        'kelompok'        => $this->Kelompok_M->getAllKelompok(),
-        'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
-        'isi'             => 'halaqoh/v-detail_kelompok',
-      ];
+      $idKelas = $this->input->get('kelas');
+      $idKelompok = $this->input->get('kelompok');
+      // check($idKelas);
+      if ($idKelas || $idKelompok) {
+        $data = [
+          'title'           => 'Detail Kelompok',
+          'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+          'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok($idKelas, $idKelompok),
+          'siswa'           => $this->Santri_M->getAllSantri(),
+          'kelas'           => $this->Kelas_M->getAllKelas(),
+          'kelompok'        => $this->Kelompok_M->getAllKelompok(),
+          'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
+          'isi'             => 'halaqoh/v-detail_kelompok',
+        ];
+        // check($data['detail_kelompok']);
+        $this->load->view('templates/wrapper-admin', $data);
+      } else {
+        $data = [
+          'title'           => 'Detail Kelompok',
+          'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+          'detail_kelompok' => '',
+          'siswa'           => $this->Santri_M->getAllSantri(),
+          'kelas'           => $this->Kelas_M->getAllKelas(),
+          'kelompok'        => $this->Kelompok_M->getAllKelompok(),
+          'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
+          'isi'             => 'halaqoh/v-detail_kelompok',
+        ];
 
-      $this->load->view('templates/wrapper-admin', $data);
+        $this->load->view('templates/wrapper-admin', $data);
+      }
     } else {
       $this->add();
     }

@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Detail_kelompok_M extends CI_Model
 {
-  public function getAllDetailKelompok()
+  public function getAllDetailKelompok($idKelas, $idKelompok)
   {
     $this->db->select('dk.*,k.NamaKelompok,s.NamaLengkap,m.NamaMusyrif,kls.NamaKelas');
     $this->db->from('detailkelompok dk');
@@ -11,6 +11,8 @@ class Detail_kelompok_M extends CI_Model
     $this->db->join('siswa s', 's.IdSiswa = dk.IdSiswa', 'left');
     $this->db->join('musyrif m', 'm.IdMusyrif = dk.IdMusyrif', 'left');
     $this->db->join('kelas kls', 'kls.IdKelas = s.IdKelas', 'left');
+    $this->db->where('kls.IdKelas', $idKelas);
+    $this->db->or_where('k.IdKelompok', $idKelompok);
     $this->db->order_by('k.NamaKelompok', 'asc');
     return $this->db->get()->result_array();
   }

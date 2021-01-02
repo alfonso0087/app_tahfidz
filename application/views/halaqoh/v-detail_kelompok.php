@@ -23,15 +23,52 @@
                   </button>
                 </div>
               <?php endif; ?>
+              <form action="<?= base_url('halaqoh/detail_kelompok'); ?>">
+                <!-- Kelas -->
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <label for="Kelas">Pilih Kelas</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select name="kelas" class="form-control">
+                      <option value=""> -- Pilih Kelas -- </option>
+                      <?php foreach ($kelas as $kls) : ?>
+                        <option value="<?= $kls['IdKelas']; ?>"><?= $kls['NamaKelas']; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+                <!-- Kelompok Halaqoh -->
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <label for="Kelompok">Pilih Kelompok Halaqoh</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select name="kelompok" class="form-control">
+                      <option value=""> -- Pilih Kelompok Halaqoh -- </option>
+                      <?php foreach ($kelompok as $kh) : ?>
+                        <option value="<?= $kh['IdKelompok']; ?>"><?= $kh['NamaKelompok']; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12 pull-right text-right">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-book"></i> Tampil Data</button>
+                  </div>
+                </div>
+              </form>
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDetailKelompok"><i class="fas fa-plus"></i> Tambah Data</button>
               </div>
 
-              <table id="example2" class="table  table-striped text-center">
+              <table id="example2" class="table table-striped text-center">
                 <thead>
                   <tr>
                     <th style="width: 50px;">No</th>
+                    <th>Kelas</th>
                     <th>Kelompok</th>
                     <th>Nama Santri</th>
                     <th>Nama Musyrif</th>
@@ -41,9 +78,11 @@
                 <tbody>
                   <?php
                   $no = 1;
-                  foreach ($detail_kelompok as $detail) : ?>
+                  if ($detail_kelompok)
+                    foreach ($detail_kelompok as $detail) : ?>
                     <tr>
                       <td><?= $no++; ?></td>
+                      <td><?= $detail['NamaKelas']; ?></td>
                       <td><?= $detail['NamaKelompok']; ?></td>
                       <td><?= $detail['NamaLengkap']; ?></td>
                       <td><?= $detail['NamaMusyrif']; ?></td>
@@ -137,7 +176,9 @@
 <!-- /.modal -->
 
 <!-- Modal AddDetailKelompok -->
-<?php foreach ($detail_kelompok as $dk) : ?>
+<?php
+if ($detail_kelompok)
+  foreach ($detail_kelompok as $dk) : ?>
   <div class="modal fade" id="editDetailKelompok<?= $dk['IdDetailKelompok']; ?>">
     <div class="modal-dialog">
       <div class="modal-content">
