@@ -21,6 +21,8 @@
               <div class="col mb-3">
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRekapUjian"><i class="fas fa-plus"></i> Tambah Data</button> -->
                 <a href="<?= base_url('ujian/rekap_ujian/form_add'); ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Data</a>
+                <a href="<?= base_url('ujian/rekap_ujian/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
+                <a href="<?= base_url('ujian/rekap_ujian/reset_data'); ?>" class="btn btn-sm btn-warning ml-3" onclick="return confirm('Reset Data Rekap Ujian?');"><i class="fas fa-ban"></i> Reset Data</a>
               </div>
 
               <!-- Form Pencarian -->

@@ -13,6 +13,12 @@ class Catatan_santri_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  //* Reset Data
+  public function kosongkanCatatanSantri()
+  {
+    return $this->db->truncate('detailcatatan');
+  }
+
   public function addCatatanSantri($data)
   {
     $this->db->insert('detailcatatan', $data);

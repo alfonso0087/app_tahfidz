@@ -3,6 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Hasil_ujian_M extends CI_Model
 {
+
+  //* Reset Data HasilUjian
+  public function kosongkanHasilUjian()
+  {
+    return $this->db->truncate('hasilujian');
+  }
+
   public function getAllHasilUjian()
   {
     $this->db->select('hu.*,s.NamaLengkap,pu.*,kls.*,p.periode');

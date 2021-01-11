@@ -166,6 +166,25 @@ class Rekap_setoran extends CI_Controller
 
     $this->load->view('templates/wrapper-admin', $data);
   }
+
+  public function reset_data()
+  {
+    $this->Rekap_setoran_M->kosongkanRekapSetoran();
+    $this->session->set_flashdata('pesan', 'Berhasil direset!');
+    redirect('halaqoh/rekap_setoran');
+  }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'   => 'Rekap Setoran',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'rekap_setoran' => $this->Rekap_setoran_M->getAllRekapSetoran(),
+      'santri' => $this->Santri_M->getAllSantri(),
+    ];
+
+    $this->load->view('export/excel/halaqoh/rekap_setoran', $data);
+  }
 }
 
 /* End of file Rekap_setoran.php */

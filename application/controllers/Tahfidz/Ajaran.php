@@ -57,6 +57,17 @@ class Ajaran extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('tahfidz/ajaran');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Ajaran',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'ajaran' => $this->Ajaran_M->getAllAjaran(),
+    ];
+
+    $this->load->view('export/excel/tahfidz/ajaran', $data);
+  }
 }
 
 /* End of file Ajaran.php */

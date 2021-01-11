@@ -27,6 +27,7 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSiswa"><i class="fas fa-plus"></i> Tambah Data</button>
+                <a href="<?= base_url('santri/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
               </div>
 
               <!-- Form Pencarian -->

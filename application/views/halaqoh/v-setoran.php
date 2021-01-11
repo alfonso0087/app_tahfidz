@@ -18,6 +18,8 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSetoran"><i class="fas fa-plus"></i> Tambah Data</button>
+                <a href="<?= base_url('halaqoh/Setoran/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
+                <a href="<?= base_url('halaqoh/setoran/reset_data'); ?>" class="btn btn-warning ml-3" onclick="return confirm('Reset Data Setoran?');"><i class="fas fa-ban"></i> Reset Data</a>
               </div>
 
               <!-- Form Pencarian -->

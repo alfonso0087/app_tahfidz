@@ -144,6 +144,18 @@ class Santri extends CI_Controller
     }
   }
 
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Santri',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'kelas' => $this->Kelas_M->getAllKelas(),
+    ];
+
+    $this->load->view('export/excel/santri', $data);
+  }
+
   // Cari data santri
   public function cari_data()
   {

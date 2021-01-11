@@ -112,6 +112,27 @@ class Catatan_santri extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('catatan/catatan_santri');
   }
+
+  public function reset_data()
+  {
+    $this->Catatan_santri_M->kosongkanCatatanSantri();
+    $this->session->set_flashdata('pesan', 'Berhasil direset!');
+    redirect('catatan/catatan_santri');
+  }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Catatan Santri',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'catatan_santri' => $this->Catatan_santri_M->getAllCatatanSantri(),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'periode' => $this->Periode_M->getAllPeriode(),
+      'jenis_catatan' => $this->Jenis_catatan_M->getAllJenisCatatan(),
+    ];
+
+    $this->load->view('export/excel/catatan/catatan_santri', $data);
+  }
 }
 
 /* End of file Catatan_santri.php */

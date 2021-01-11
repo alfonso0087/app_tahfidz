@@ -190,17 +190,17 @@ class Musyrif extends CI_Controller
     }
   }
 
-  // public function export()
-  // {
-  //   $tipeFile = $this->input->post('tipeFile');
-  //   if ($tipeFile == "pdf") {
-  //     $this->export_pdf();
-  //   } elseif ($tipeFile == 'xls') {
-  //     $this->export_xls();
-  //   } else {
-  //     $this->export_xlsx();
-  //   }
-  // }
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Musyrif',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'musyrif' => $this->Musyrif_M->getAllMusyrif(),
+      'isi' => 'musyrif/index',
+    ];
+
+    $this->load->view('export/excel/musyrif', $data);
+  }
 
   public function export_pdf()
   {

@@ -76,6 +76,21 @@ class Periode_Ujian extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('ujian/periode_ujian');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'         => 'Periode Ujian',
+      'user'          => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'periode_ujian' => $this->Periode_ujian_M->getAllPeriodeUjian(),
+      'tahun_ajaran'  => $this->Ajaran_M->getAllAjaran(),
+      'kelas'         => $this->Kelas_M->getAllKelas(),
+      'periode'       => $this->Periode_M->getAllPeriode(),
+      'semester'      => $this->Semester_M->getAllSemester(),
+    ];
+
+    $this->load->view('export/excel/ujian/periode_ujian', $data);
+  }
 }
 
 /* End of file periode.php */

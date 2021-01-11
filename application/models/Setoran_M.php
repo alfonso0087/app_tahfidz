@@ -29,6 +29,12 @@ class Setoran_M extends CI_Model
     return $this->db->get()->result_array();
   }
 
+  //* Reset Data
+  public function kosongkanSetoran()
+  {
+    return $this->db->truncate('setorantarget');
+  }
+
   public function addSetoran($data)
   {
     $this->db->insert('setorantarget', $data);

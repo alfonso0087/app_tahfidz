@@ -59,6 +59,17 @@ class Jenis_pelanggaran extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('pelanggaran/jenis_pelanggaran');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Jenis Pelanggaran',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'jenispelanggaran' => $this->Jenis_pelanggaran_M->getAllJenisPelanggaran(),
+    ];
+
+    $this->load->view('export/excel/pelanggaran/jenis_pelanggaran', $data);
+  }
 }
 
 /* End of file Jenis_pelanggaran.php */

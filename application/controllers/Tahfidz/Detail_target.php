@@ -63,6 +63,18 @@ class Detail_target extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('tahfidz/detail_target');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'   => 'Data Detail Target',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'detail'  => $this->Detail_target_M->getAllDetailTarget(),
+      'target'  => $this->Target_M->getAllTarget(),
+    ];
+
+    $this->load->view('export/excel/tahfidz/detail_target', $data);
+  }
 }
 
 /* End of file Detail_target.php */

@@ -57,6 +57,17 @@ class Semester extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('tahfidz/semester');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Semester',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'semester' => $this->Semester_M->getAllSemester(),
+    ];
+
+    $this->load->view('export/excel/tahfidz/semester', $data);
+  }
 }
 
 /* End of file Semester.php */

@@ -62,6 +62,13 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDetailKelompok"><i class="fas fa-plus"></i> Tambah Data</button>
+
+                <?php if ($detail_kelompok) : ?>
+                  <!-- <a href="<?= base_url('halaqoh/Detail_kelompok/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a> -->
+                <?php else : ?>
+                  <a href="<?= base_url('halaqoh/Detail_kelompok/export_all_data_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
+                <?php endif; ?>
+                <a href="<?= base_url('halaqoh/detail_kelompok/reset_data'); ?>" class="btn btn-warning ml-3" onclick="return confirm('Reset Data Detail Kelompok?');"><i class="fas fa-ban"></i> Reset Data</a>
               </div>
 
               <table id="example2" class="table table-striped text-center">
@@ -78,20 +85,36 @@
                 <tbody>
                   <?php
                   $no = 1;
-                  if ($detail_kelompok)
+                  if ($detail_kelompok) {
                     foreach ($detail_kelompok as $detail) : ?>
-                    <tr>
-                      <td><?= $no++; ?></td>
-                      <td><?= $detail['NamaKelas']; ?></td>
-                      <td><?= $detail['NamaKelompok']; ?></td>
-                      <td><?= $detail['NamaLengkap']; ?></td>
-                      <td><?= $detail['NamaMusyrif']; ?></td>
-                      <td>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#editDetailKelompok<?= $detail['IdDetailKelompok']; ?>">Ubah</button>
-                        <a href="<?= base_url('halaqoh/detail_kelompok/delete/' . $detail['IdDetailKelompok']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Detail Kelompok" namaData=<?= $detail['NamaKelompok']; ?>>Hapus</a>
-                      </td>
-                    </tr>
-                  <?php endforeach; ?>
+                      <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $detail['NamaKelas']; ?></td>
+                        <td><?= $detail['NamaKelompok']; ?></td>
+                        <td><?= $detail['NamaLengkap']; ?></td>
+                        <td><?= $detail['NamaMusyrif']; ?></td>
+                        <td>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#editDetailKelompok<?= $detail['IdDetailKelompok']; ?>">Ubah</button>
+                          <a href="<?= base_url('halaqoh/detail_kelompok/delete/' . $detail['IdDetailKelompok']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Detail Kelompok" namaData=<?= $detail['NamaKelompok']; ?>>Hapus</a>
+                        </td>
+                      </tr>
+                    <?php endforeach;
+                  } else { ?>
+                    <?php foreach ($list_detail_kelompok as $ldk) : ?>
+                      <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $ldk['NamaKelas']; ?></td>
+                        <td><?= $ldk['NamaKelompok']; ?></td>
+                        <td><?= $ldk['NamaLengkap']; ?></td>
+                        <td><?= $ldk['NamaMusyrif']; ?></td>
+                        <td>
+                          <button class="btn btn-success" data-toggle="modal" data-target="#editDetailKelompok<?= $ldk['IdDetailKelompok']; ?>">Ubah</button>
+                          <a href="<?= base_url('halaqoh/detail_kelompok/delete/' . $ldk['IdDetailKelompok']); ?>" class="btn btn-danger ml-3 tombol-hapus" tipeData="Detail Kelompok" namaData=<?= $ldk['NamaKelompok']; ?>>Hapus</a>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php } ?>
+
                 </tbody>
               </table>
 

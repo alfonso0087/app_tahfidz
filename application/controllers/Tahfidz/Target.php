@@ -76,6 +76,21 @@ class Target extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('tahfidz/target');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'    => 'Data Target',
+      'user'     => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'target'   => $this->Target_M->getAllTarget(),
+      'kelas'    => $this->Kelas_M->getAllKelas(),
+      'periode'  => $this->Periode_M->getAllPeriode(),
+      'ajaran'   => $this->Ajaran_M->getAllAjaran(),
+      'semester' => $this->Semester_M->getAllSemester(),
+    ];
+
+    $this->load->view('export/excel/tahfidz/target', $data);
+  }
 }
 
 /* End of file Target.php */

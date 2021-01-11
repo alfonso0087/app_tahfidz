@@ -3,6 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Catatan_pelanggaran_M extends CI_Model
 {
+
+  //* Reset Data Pelanggaran
+  public function kosongkanPelanggaran()
+  {
+    return $this->db->truncate('pelanggaran');
+  }
+
   public function getAllCatatanPelanggaran()
   {
     $this->db->select('p.*,s.NamaLengkap,jp.JenisIqob');

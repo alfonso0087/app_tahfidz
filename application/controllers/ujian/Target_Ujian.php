@@ -59,6 +59,18 @@ class Target_Ujian extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('ujian/target_ujian');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'   => 'Data Target Ujian',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'jenis_ujian' => $this->Jenis_ujian_M->getAllJenisUjian(),
+      'target_ujian' => $this->Target_ujian_M->getAllTargetUjian(),
+    ];
+
+    $this->load->view('export/excel/ujian/target_ujian', $data);
+  }
 }
 
 /* End of file Target_Ujian.php */

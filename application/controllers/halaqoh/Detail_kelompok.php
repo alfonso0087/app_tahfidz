@@ -37,6 +37,7 @@ class Detail_kelompok extends CI_Controller
           'title'           => 'Detail Kelompok',
           'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
           'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok($idKelas, $idKelompok),
+          'list_detail_kelompok' => '',
           'siswa'           => $this->Santri_M->getAllSantri(),
           'kelas'           => $this->Kelas_M->getAllKelas(),
           'kelompok'        => $this->Kelompok_M->getAllKelompok(),
@@ -50,6 +51,7 @@ class Detail_kelompok extends CI_Controller
           'title'           => 'Detail Kelompok',
           'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
           'detail_kelompok' => '',
+          'list_detail_kelompok' => $this->Detail_kelompok_M->tampilAllDetailKelompok(),
           'siswa'           => $this->Santri_M->getAllSantri(),
           'kelas'           => $this->Kelas_M->getAllKelas(),
           'kelompok'        => $this->Kelompok_M->getAllKelompok(),
@@ -98,6 +100,44 @@ class Detail_kelompok extends CI_Controller
     $this->Detail_kelompok_M->deleteDetailKelompok($data);
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('halaqoh/detail_kelompok');
+  }
+
+  public function reset_data()
+  {
+    $this->Detail_kelompok_M->kosongkanDetailKelompok();
+    $this->session->set_flashdata('pesan', 'Berhasil direset!');
+    redirect('halaqoh/detail_kelompok');
+  }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'           => 'Detail Kelompok',
+      'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'detail_kelompok' => '',
+      'list_detail_kelompok' => $this->Detail_kelompok_M->tampilAllDetailKelompok(),
+      'siswa'           => $this->Santri_M->getAllSantri(),
+      'kelas'           => $this->Kelas_M->getAllKelas(),
+      'kelompok'        => $this->Kelompok_M->getAllKelompok(),
+      'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
+    ];
+
+    $this->load->view('export/excel/all_detail_kelompok', $data);
+  }
+  public function export_all_data_excel()
+  {
+    $data = [
+      'title'           => 'Detail Kelompok',
+      'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'detail_kelompok' => '',
+      'list_detail_kelompok' => $this->Detail_kelompok_M->tampilAllDetailKelompok(),
+      'siswa'           => $this->Santri_M->getAllSantri(),
+      'kelas'           => $this->Kelas_M->getAllKelas(),
+      'kelompok'        => $this->Kelompok_M->getAllKelompok(),
+      'musyrif'         => $this->Musyrif_M->getAllMusyrif(),
+    ];
+
+    $this->load->view('export/excel/halaqoh/all_detail_kelompok', $data);
   }
 }
 

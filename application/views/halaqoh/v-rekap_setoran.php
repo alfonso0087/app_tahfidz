@@ -18,6 +18,8 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <a href="<?= base_url('halaqoh/rekap_setoran/form_add'); ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Proses Setoran</a>
+                <a href="<?= base_url('halaqoh/rekap_setoran/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
+                <a href="<?= base_url('halaqoh/rekap_setoran/reset_data'); ?>" class="btn btn-warning ml-3" onclick="return confirm('Reset Data Rekap Setoran?');"><i class="fas fa-ban"></i> Reset Data</a>
               </div>
 
               <!-- Form Pencarian -->

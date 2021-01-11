@@ -57,6 +57,17 @@ class Periode extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('tahfidz/periode');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Periode',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'periode' => $this->Periode_M->getAllPeriode(),
+    ];
+
+    $this->load->view('export/excel/tahfidz/periode', $data);
+  }
 }
 
 /* End of file Periode.php */

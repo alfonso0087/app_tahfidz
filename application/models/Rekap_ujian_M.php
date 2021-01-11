@@ -60,9 +60,11 @@ class Rekap_ujian_M extends CI_Model
     return $query->row_array();
   }
 
-  // public function sumNilai()
-  // {
-  // }
+  //* Reset Data
+  public function kosongkanRekapUjian()
+  {
+    return $this->db->truncate('rekapujian');
+  }
 
   public function addRekapUjian($data)
   {

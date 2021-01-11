@@ -36,6 +36,12 @@ class Rekap_setoran_M extends CI_Model
     // return $this->db->get()->result_array();
   }
 
+  //* Reset Data
+  public function kosongkanRekapSetoran()
+  {
+    return $this->db->truncate('rekapsetoran');
+  }
+
   public function countKeterangan($idSiswa, $pekan)
   {
     $this->db->select('`setorantarget`.`IdDetailKelompok`,`detailkelompok`.`IdSiswa`, `siswa`.*,`target`.`Pekan`, COALESCE(COUNT(*),0) jumlah_setoran');

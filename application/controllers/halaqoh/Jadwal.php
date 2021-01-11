@@ -60,6 +60,17 @@ class Jadwal extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('halaqoh/jadwal');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'   => 'Waktu Halaqoh',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'jadwal'  => $this->Jadwal_M->getAllJadwal(),
+    ];
+
+    $this->load->view('export/excel/halaqoh/jadwal', $data);
+  }
 }
 
 /* End of file Jadwal.php */

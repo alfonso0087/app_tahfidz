@@ -25,7 +25,8 @@ class Setoran extends CI_Controller
       'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
       'setoran' => $this->Setoran_M->getAllSetoran(),
       'detail_target' => $this->Detail_target_M->getAllDetailTarget(),
-      'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
+      // 'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
+      'detail_kelompok' => $this->Detail_kelompok_M->tampilAllDetailKelompok(),
       'kelas' => $this->Kelas_M->getAllKelas(),
       'jadwal' => $this->Jadwal_M->getAllJadwal(),
       'kelompok' => $this->Kelompok_M->getAllKelompok(),
@@ -118,6 +119,30 @@ class Setoran extends CI_Controller
     ];
 
     $this->load->view('templates/wrapper-admin', $data);
+  }
+
+  public function reset_data()
+  {
+    $this->Setoran_M->kosongkanSetoran();
+    $this->session->set_flashdata('pesan', 'Berhasil direset!');
+    redirect('halaqoh/setoran');
+  }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'   => 'Setoran',
+      'user'    => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'setoran' => $this->Setoran_M->getAllSetoran(),
+      'detail_target' => $this->Detail_target_M->getAllDetailTarget(),
+      // 'detail_kelompok' => $this->Detail_kelompok_M->getAllDetailKelompok(),
+      'detail_kelompok' => $this->Detail_kelompok_M->tampilAllDetailKelompok(),
+      'kelas' => $this->Kelas_M->getAllKelas(),
+      'jadwal' => $this->Jadwal_M->getAllJadwal(),
+      'kelompok' => $this->Kelompok_M->getAllKelompok(),
+    ];
+
+    $this->load->view('export/excel/halaqoh/setoran', $data);
   }
 }
 

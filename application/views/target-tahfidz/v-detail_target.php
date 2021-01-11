@@ -20,8 +20,7 @@
               <!-- Add/Import/Export -->
               <div class="col mb-3">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDetailTarget"><i class="fas fa-plus"></i> Tambah Data</button>
-                <!-- <button type="button" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#importDetailTarget"><i class="fas fa-fw fa-file-upload"></i> Import Data</button> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDetailTarget"><i class="fas fa-plus"></i> Tambah Data</button> -->
+                <a href="<?= base_url('tahfidz/detail_target/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
               </div>
 
               <table id="example2" class="table  table-striped text-center">

@@ -62,6 +62,17 @@ class Kelas extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('kelas');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Data Kelas',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'kelas' => $this->Kelas_M->getAllKelas(),
+    ];
+
+    $this->load->view('export/excel/kelas', $data);
+  }
 }
 
 /* End of file Kelas.php */

@@ -22,6 +22,8 @@
                 <a href="<?= base_url('ujian/hasil_ujian/form_add'); ?>" class="btn btn-primary btn-sm"><i class="fas fa-user"></i> Proses Nilai (Individu)</a>
                 <a href="<?= base_url('ujian/hasil_ujian/form_add_banyak'); ?>" class="btn btn-primary btn-sm ml-2"><i class="fas fa-users"></i> Proses Nilai (Kelas)</a>
                 <a href="<?= base_url('ujian/hasil_ujian/perankingan'); ?>" class="btn btn-primary btn-sm ml-2"><i class="fas fa-sort-numeric-down"></i> Perankingan</a>
+                <a href="<?= base_url('ujian/hasil_ujian/export_excel'); ?>" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Export Data</a>
+                <a href="<?= base_url('ujian/hasil_ujian/reset_hasilujian'); ?>" class="btn btn-sm btn-warning ml-3" onclick="return confirm('Reset Data Hasil Ujian?');"><i class="fas fa-ban"></i> Reset Data</a>
               </div>
 
               <div class="row" style="text-align: right;">

@@ -24,8 +24,6 @@
 
        <!-- REQUIRED SCRIPTS -->
 
-       <!-- jQuery -->
-       <!-- <script src="<?= base_url('vendors/'); ?>plugins/jquery/jquery.min.js"></script> -->
        <!-- Bootstrap 4 -->
        <script src="<?= base_url('vendors/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
        <!-- overlayScrollbars -->

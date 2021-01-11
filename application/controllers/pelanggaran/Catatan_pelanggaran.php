@@ -79,6 +79,26 @@ class Catatan_pelanggaran extends CI_Controller
     // check($getPoin);
     echo json_encode($hasil);
   }
+
+  public function reset_pelanggaran()
+  {
+    $this->Catatan_pelanggaran_M->kosongkanPelanggaran();
+    $this->session->set_flashdata('pesan', 'Berhasil direset!');
+    redirect('pelanggaran/catatan_pelanggaran');
+  }
+
+  public function export_excel()
+  {
+    $data = [
+      'title' => 'Catatan Pelanggaran',
+      'user' => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'pelanggaran' => $this->Catatan_pelanggaran_M->getAllCatatanPelanggaran(),
+      'santri' => $this->Santri_M->getAllSantri(),
+      'jenisiqob' => $this->Jenis_pelanggaran_M->getAllJenisPelanggaran(),
+    ];
+
+    $this->load->view('export/excel/pelanggaran/catatan_pelanggaran', $data);
+  }
 }
 
 /* End of file Catatan_pelanggaran.php */

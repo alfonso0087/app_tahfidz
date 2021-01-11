@@ -10,6 +10,29 @@ if (flashData) {
 	})
 }
 
+// sweetalert tombol reset
+$('.tombol-reset').on('click', function (e) {
+	// const data = $(this).attr('namaData')
+	const tipeData = $(this).attr('tipeData')
+	e.preventDefault();
+	const href = $(this).attr('href');
+
+	Swal.fire({
+		title: 'Reset ' + title + '?',
+		text: 'Yakin reset data ' + tipeData + '?',
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Batal',
+		confirmButtonText: 'Reset Data!'
+	}).then((result) => {
+		if (result.value) {
+			document.location.href = href;
+		}
+	})
+
+});
 
 // sweetalert tombol hapus
 $('.tombol-hapus').on('click', function (e) {
@@ -17,7 +40,7 @@ $('.tombol-hapus').on('click', function (e) {
 	const tipeData = $(this).attr('tipeData')
 	e.preventDefault();
 	const href = $(this).attr('href');
-
+	
 	Swal.fire({
 		title: 'Hapus ' + title + '?',
 		text: 'Yakin hapus ' + tipeData + ' ' + data + '?',
@@ -32,5 +55,8 @@ $('.tombol-hapus').on('click', function (e) {
 			document.location.href = href;
 		}
 	})
-
+	
 });
+
+
+

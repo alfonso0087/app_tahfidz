@@ -56,6 +56,17 @@ class Kelompok extends CI_Controller
     $this->session->set_flashdata('pesan', 'Berhasil dihapus!');
     redirect('halaqoh/kelompok');
   }
+
+  public function export_excel()
+  {
+    $data = [
+      'title'           => 'Kelompok',
+      'user'            => $this->db->get_where('login', ['username' => $this->session->userdata('username')])->row_array(),
+      'kelompokhalaqoh' => $this->Kelompok_M->getAllKelompok(),
+    ];
+
+    $this->load->view('export/excel/halaqoh/kelompok', $data);
+  }
 }
 
 /* End of file Kelompok.php */
